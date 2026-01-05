@@ -72,9 +72,7 @@ export default function MangaSection() {
                 <div className="p-8 border border-dashed border-slate-700 rounded-xl bg-slate-900/50">
                     <h3 className="text-2xl font-bold mb-4">Kindle版 配信中！</h3>
                     <p className="text-muted-foreground mb-6">
-                        高解像度で読むならKindleがおすすめ。
-                        <br />
-                        特典イラストも収録！
+                        「限界SEアラサー女子の日常」  全40話タダで読めます。
                     </p>
                     <Button
                         size="lg"
