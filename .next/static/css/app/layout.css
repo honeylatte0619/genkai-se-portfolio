@@ -1753,6 +1753,9 @@ video {
 .max-h-full {
   max-height: 100%;
 }
+.min-h-\[100dvh\] {
+  min-height: 100dvh;
+}
 .min-h-\[400px\] {
   min-height: 400px;
 }
@@ -1879,6 +1882,9 @@ video {
 }
 .items-center {
   align-items: center;
+}
+.justify-start {
+  justify-content: flex-start;
 }
 .justify-center {
   justify-content: center;
@@ -2255,11 +2261,17 @@ video {
 .pb-2 {
   padding-bottom: 0.5rem;
 }
+.pb-4 {
+  padding-bottom: 1rem;
+}
 .pr-2 {
   padding-right: 0.5rem;
 }
 .pt-16 {
   padding-top: 4rem;
+}
+.pt-20 {
+  padding-top: 5rem;
 }
 .pt-24 {
   padding-top: 6rem;
@@ -2806,6 +2818,15 @@ body {
 
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:justify-center {
+    justify-content: center;
+  }
+
+  .md\:py-20 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 
   .md\:text-2xl {

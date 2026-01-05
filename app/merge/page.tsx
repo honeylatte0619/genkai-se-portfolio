@@ -299,7 +299,7 @@ export default function MergePuzzle() {
     }, []);
 
     return (
-        <main className="min-h-screen bg-background text-foreground py-20 flex flex-col items-center justify-center overscroll-none touch-none">
+        <main className="min-h-[100dvh] bg-background text-foreground pt-20 pb-4 md:py-20 flex flex-col items-center justify-start md:justify-center overscroll-none touch-none">
             <h1 className="text-3xl font-bold font-mono mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">
                 限界マージパズル
             </h1>
