@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/sections/Hero";
 import CharacterSection from "@/components/sections/CharacterSection";
 import MangaSection from "@/components/sections/MangaSection";
+import GameSection from "@/components/sections/GameSection";
 import GoodsSection from "@/components/sections/GoodsSection";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
             <Header />
             <Hero />
             <CharacterSection />
+            <GameSection />
             <MangaSection />
             <GoodsSection />
             <Footer />
