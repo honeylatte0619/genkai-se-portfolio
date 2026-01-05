@@ -428,7 +428,7 @@ export default function RPGPage() {
                     </Button>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[700px] lg:h-[600px]">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-auto lg:h-[600px]">
 
                     {/* LEFT: STATUS */}
                     <div className="order-1 lg:order-1 bg-slate-900 border border-slate-700 rounded-xl p-6 flex flex-col gap-4">
@@ -479,7 +479,7 @@ export default function RPGPage() {
                     </div>
 
                     {/* CENTER: LOG */}
-                    <div className="order-3 lg:order-2 bg-black border border-green-900/50 rounded-xl p-4 font-mono text-sm overflow-hidden flex flex-col shadow-[0_0_20px_rgba(0,255,0,0.1)]">
+                    <div className="order-3 lg:order-2 bg-black border border-green-900/50 rounded-xl p-4 font-mono text-sm overflow-hidden flex flex-col shadow-[0_0_20px_rgba(0,255,0,0.1)] h-64 lg:h-auto">
                         <div className="flex-1 overflow-y-auto space-y-1 pr-2 custom-scrollbar">
                             {logs.map((log) => (
                                 <div key={log.id} className={`

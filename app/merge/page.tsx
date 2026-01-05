@@ -284,42 +284,62 @@ export default function MergePuzzle() {
     };
 
 
+    const [scale, setScale] = useState(1);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const maxWidth = window.innerWidth - 32; // padding
+            const s = Math.min(1, maxWidth / ENGINE_WIDTH);
+            setScale(s);
+        };
+
+        handleResize(); // Init
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     return (
         <main className="min-h-screen bg-background text-foreground py-20 flex flex-col items-center justify-center overscroll-none touch-none">
             <h1 className="text-3xl font-bold font-mono mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary">
                 限界マージパズル
             </h1>
 
-            <div className="flex gap-8 items-start relative">
-                {/* Game Area */}
-                <div
-                    className="relative border-4 border-slate-700 rounded-lg overflow-hidden bg-slate-900 shadow-2xl"
-                    style={{ width: ENGINE_WIDTH, height: ENGINE_HEIGHT }}
-                    onPointerDown={handlePointerDown}
-                >
-                    <div ref={sceneRef} className="absolute inset-0" />
+            <div className="flex gap-8 items-start relative justify-center w-full">
+                {/* Game Area Wrapper for Scaling */}
+                <div style={{ width: ENGINE_WIDTH * scale, height: ENGINE_HEIGHT * scale, position: "relative" }}>
+                    <div
+                        className="relative border-4 border-slate-700 rounded-lg overflow-hidden bg-slate-900 shadow-2xl origin-top-left"
+                        style={{
+                            width: ENGINE_WIDTH,
+                            height: ENGINE_HEIGHT,
+                            transform: `scale(${scale})`
+                        }}
+                        onPointerDown={handlePointerDown}
+                    >
+                        <div ref={sceneRef} className="absolute inset-0" />
 
-                    {/* UI Overlay: Click to Start */}
-                    {!isStarted && !gameOver && (
-                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10">
-                            <Button size="lg" className="text-xl font-bold px-8 py-6 gap-2" onClick={restartGame}>
-                                <Play className="w-8 h-8" />
-                                Game Start
-                            </Button>
-                        </div>
-                    )}
+                        {/* UI Overlay: Click to Start */}
+                        {!isStarted && !gameOver && (
+                            <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10">
+                                <Button size="lg" className="text-xl font-bold px-8 py-6 gap-2" onClick={restartGame}>
+                                    <Play className="w-8 h-8" />
+                                    Game Start
+                                </Button>
+                            </div>
+                        )}
 
-                    {/* UI Overlay: Game Over */}
-                    {gameOver && (
-                        <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-20 p-8 text-center">
-                            <h2 className="text-4xl font-bold text-red-500 mb-2">DEADLINE OVER</h2>
-                            <p className="text-xl text-white mb-8">Score: {score}</p>
-                            <Button size="lg" variant="destructive" className="font-bold gap-2" onClick={restartGame}>
-                                <RefreshCw className="w-6 h-6" />
-                                Retry
-                            </Button>
-                        </div>
-                    )}
+                        {/* UI Overlay: Game Over */}
+                        {gameOver && (
+                            <div className="absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-20 p-8 text-center">
+                                <h2 className="text-4xl font-bold text-red-500 mb-2">DEADLINE OVER</h2>
+                                <p className="text-xl text-white mb-8">Score: {score}</p>
+                                <Button size="lg" variant="destructive" className="font-bold gap-2" onClick={restartGame}>
+                                    <RefreshCw className="w-6 h-6" />
+                                    Retry
+                                </Button>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
 
