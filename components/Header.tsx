@@ -18,6 +18,8 @@ export default function Header() {
                 <nav className="hidden md:flex items-center space-x-6 text-sm font-medium text-muted-foreground">
                     <Link href="#manga" className="hover:text-primary transition-colors">Manga</Link>
                     <Link href="#goods" className="hover:text-primary transition-colors">Goods</Link>
+                    <Link href="/merge" className="hover:text-primary transition-colors font-bold text-accent">Puzzle</Link>
+                    <Link href="/rpg" className="hover:text-primary transition-colors font-bold text-green-400">RPG</Link>
                     <Link href="/game" className="text-secondary hover:text-accent transition-colors font-bold">
                         Game_Start()
                     </Link>
