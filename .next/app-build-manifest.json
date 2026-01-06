@@ -1,5 +1,10 @@
 {
   "pages": {
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -11,10 +16,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/merge/page.js"
     ],
-    "/page": [
+    "/rpg/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/rpg/page.js"
+    ],
+    "/game/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/game/page.js"
     ]
   }
 }
