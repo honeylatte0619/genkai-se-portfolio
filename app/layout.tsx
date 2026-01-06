@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,7 @@ export default function RootLayout({
             <body className={cn(notoSansJP.className, "bg-background text-foreground antialiased")}>
                 {children}
             </body>
+            <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
         </html>
     );
 }
