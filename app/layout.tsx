@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+import { OfuseButton } from "@/components/OfuseButton";
 import { cn } from "@/lib/utils";
 
 const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
@@ -20,6 +21,7 @@ export default function RootLayout({
         <html lang="ja">
             <body className={cn(notoSansJP.className, "bg-background text-foreground antialiased")}>
                 {children}
+                <OfuseButton />
             </body>
             <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
         </html>
