@@ -15,6 +15,7 @@ namespace IsekaiStatusMaker.Models
         public int LUK { get; set; }
 
         public string Name { get; set; } = "名無しの転生者";
+        public string Job { get; set; } = "冒険者";
         public string Title { get; private set; } = "駆け出しの冒険者";
         public string Rank { get; private set; } = "E";
         

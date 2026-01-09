@@ -2,6 +2,7 @@
 @page "/index.html"
 @using IsekaiStatusMaker.Models
 @inject IJSRuntime JSRuntime
+@inject ISnackbar Snackbar
 
 <PageTitle>異世界ステータスメーカー</PageTitle>
 
@@ -98,6 +99,7 @@
                 <MudText Typo="Typo.h5" Class="cyber-font mb-4" Color="Color.Primary">SYSTEM CONSOLE</MudText>
                 
                 <MudTextField @bind-Value="status.Name" Label="名前" Variant="Variant.Outlined" Class="mb-4" />
+                <MudTextField @bind-Value="status.Job" Label="職業" Variant="Variant.Outlined" Class="mb-4" />
                 
                 <MudSwitch @bind-Value="IsRealMode" Color="Color.Secondary" Class="mb-4">
                     @(IsRealMode ? "モード: 限界SE (現実)" : "モード: ファンタジー (異世界)")
@@ -149,9 +151,12 @@
 
         <!-- Right Column: Preview -->
         <MudItem xs="12" md="8">
-             <div class="d-flex justify-end mb-2">
+             <div class="d-flex justify-end mb-2 gap-2">
+                 <MudButton Variant="Variant.Filled" Color="Color.Surface" StartIcon="@Icons.Custom.Brands.Twitter" OnClick="ShareToX" Style="background-color: black; color: white;">
+                     Xで自慢する
+                 </MudButton>
                  <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download" OnClick="DownloadImage">
-                     召喚状を発行 (Download)
+                     画像を保存
                  </MudButton>
              </div>
              
@@ -298,6 +303,23 @@
     private async Task DownloadImage()
     {
         await JSRuntime.InvokeVoidAsync("downloadCard", "status-card", $"{status.Name}_status.png");
+    }
+    
+    private async Task ShareToX()
+    {
+        var text = $"【異世界転生ステータス】\n" +
+                   $"名前: {status.Name}\n" +
+                   $"職業: {status.Job}\n" +
+                   $"総合ランク: {status.Rank}\n" +
+                   $"称号: {status.Title}\n\n" +
+                   $"画像を添付してステータスを公開しよう！ #IsekaiStatusMaker #限界SE";
+                   
+        var url = "https://genkai-se-portfolio.vercel.app/isekai-status-maker/index.html";
+        var shareUrl = $"https://twitter.com/intent/tweet?text={Uri.EscapeDataString(text)}&url={Uri.EscapeDataString(url)}";
+        
+        await JSRuntime.InvokeVoidAsync("open", shareUrl, "_blank");
+        
+        Snackbar.Add("投稿画面が開きます。さっき保存した画像を貼り付けてね！", Severity.Success);
     }
     
     private string GetRankColorClass(string rank)
