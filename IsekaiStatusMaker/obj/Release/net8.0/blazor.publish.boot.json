@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "IsekaiStatusMaker",
   "resources": {
-    "hash": "sha256-cTavu1lObvtOMO9ZcMK5v+2Nb1TDaN1eobN5X84Hyk8=",
+    "hash": "sha256-auQfmNjFv40ks6VPqCG6M6PoIRN03WWz0psUWSeRGsE=",
     "jsModuleNative": {
       "dotnet.native.8.0.22.uftlfveqmd.js": "sha256-vtotCeXt2UD6oc459laJT32vBgigZ+eLoUmdeFkvYDk="
     },
@@ -17,7 +17,7 @@
       "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
     },
     "assembly": {
-      "IsekaiStatusMaker.wasm": "sha256-F36hIwm4w28La3d/qcgGKTD/DUm24I/k7qz9UoDMkPQ=",
+      "IsekaiStatusMaker.wasm": "sha256-sqsM1mGOUvJjk9CapbAmtI9nIfvmvoH6gU+XDCKX3yo=",
       "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-Bn7MV/qHZi2UIq/pKpy97/xkF1ajAJNTORpiJHIHWdY=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-YOPirMXubMHG5y7ZBzvamX81vGE3XZ9wXVcAM9S8IM0=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-wCtuJEWwvinjt+DM9h2agb54e7yR/bQZNGxAY6QufE4=",
