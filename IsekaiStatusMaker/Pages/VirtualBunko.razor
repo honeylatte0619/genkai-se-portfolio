@@ -1,5 +1,6 @@
 @page "/virtual-bunko"
 @inject IJSRuntime JSRuntime
+@inject ISnackbar Snackbar
 @using System.IO
 
 <PageTitle>Virtual Bunko Press</PageTitle>
@@ -11,6 +12,9 @@
     <MudItem xs="12" md="5">
         <MudPaper Elevation="3" Class="pa-4">
             <MudText Typo="Typo.h6" Class="mb-4">Editor</MudText>
+
+            <button onclick="alert('HTML Click')" style="padding: 10px; background: red; color: white; margin-bottom: 10px;">HTML TEST</button>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => UseSnackbar("Blazor Click Works"))">Blazor TEST</MudButton>
 
             <!-- 1. Background Image -->
             <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="mt-4">1. Cover Illustration</MudText>
@@ -290,6 +294,11 @@
     private string ObiColor = "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)";
     
     private string AuthorName = "著: 迷える子羊 / Illust: AI";
+
+    private void UseSnackbar(string msg)
+    {
+        Snackbar.Add(msg, Severity.Error);
+    }
 
     private async Task OnImageUpload(IBrowserFile file)
     {
