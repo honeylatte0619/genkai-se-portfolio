@@ -26,7 +26,7 @@
             
             <MudExpansionPanels MultiExpansion="true">
                 <!-- Assets -->
-                <MudExpansionPanel Text="1. Assets" Expanded="true">
+                <MudExpansionPanel Text="1. Assets" @bind-Expanded="_assetsExpanded">
                     <MudFileUpload T="IBrowserFile" FilesChanged="OnBgUpload">
                         <ActivatorContent>
                             <MudButton HtmlTag="label"
@@ -51,21 +51,21 @@
                 </MudExpansionPanel>
 
                 <!-- Character Settings -->
-                <MudExpansionPanel Text="2. Character">
+                <MudExpansionPanel Text="2. Character" @bind-Expanded="_characterExpanded">
                      <MudSlider @bind-Value="CharX" Min="0" Max="854" Step="10" Color="Color.Info">X Position: @CharX</MudSlider>
                      <MudSlider @bind-Value="CharScale" Min="0.1" Max="2.0" Step="0.1" Color="Color.Info">Scale: @CharScale</MudSlider>
                      <MudSwitch @bind-Value="CharFlip" Color="Color.Secondary">Flip Horizontal</MudSwitch>
                 </MudExpansionPanel>
 
                 <!-- Dialogue -->
-                <MudExpansionPanel Text="3. Dialogue">
+                <MudExpansionPanel Text="3. Dialogue" @bind-Expanded="_dialogueExpanded">
                     <MudTextField @bind-Value="CharacterName" Label="Character Name" Variant="Variant.Outlined" />
                     <MudTextField @bind-Value="BodyText" Label="Message Body" Variant="Variant.Outlined" Lines="4" Class="mt-2" />
                     <MudSlider @bind-Value="CharSpeed" Min="50" Max="300" Step="10" Color="Color.Warning" Class="mt-4">Speed (ms/char)</MudSlider>
                 </MudExpansionPanel>
 
                 <!-- Export -->
-                <MudExpansionPanel Text="4. Export">
+                <MudExpansionPanel Text="4. Export" @bind-Expanded="_exportExpanded">
                     @if (isGenerating)
                     {
                         <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
@@ -138,6 +138,12 @@
 
     private bool isGenerating = false;
     private bool isInitialized = false;
+
+    // Panel Expansion States
+    private bool _assetsExpanded = true;
+    private bool _characterExpanded = false;
+    private bool _dialogueExpanded = false;
+    private bool _exportExpanded = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
