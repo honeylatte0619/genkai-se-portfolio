@@ -1,5 +1,6 @@
 @page "/novel-promo"
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 @using System.IO
 
 <PageTitle>Novel Promo Maker</PageTitle>
@@ -74,6 +75,9 @@
                     {
                         <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick="GenerateGif" StartIcon="@Icons.Material.Filled.MovieCreation">
                             Generate GIF
+                        </MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Surface" FullWidth="true" Class="mt-2" OnClick="ShareOnX" StartIcon="@Icons.Custom.Brands.Twitter">
+                            Xで自慢する
                         </MudButton>
                     }
                 </MudExpansionPanel>
@@ -219,5 +223,16 @@
             isGenerating = false;
             StateHasChanged();
         }
+    }
+
+
+    private async Task ShareOnX()
+    {
+        var text = Uri.EscapeDataString("異世界ステータスメーカーで宣伝動画を作りました！");
+        var hashtags = "IsekaiStatusMaker,NovelPromo";
+        var url = Uri.EscapeDataString(NavigationManager.Uri);
+        var intentUrl = $"https://twitter.com/intent/tweet?text={text}&hashtags={hashtags}&url={url}";
+        
+        await JSRuntime.InvokeVoidAsync("open", intentUrl, "_blank");
     }
 }
