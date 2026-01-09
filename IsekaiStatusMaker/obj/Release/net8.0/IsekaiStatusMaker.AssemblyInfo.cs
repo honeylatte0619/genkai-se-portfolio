@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IsekaiStatusMaker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80a0f1c6b0cbbd62fba9360b3bd1fe19428ac9c6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9322cb08a65e27165bd15587afeee39f5227c9d4")]
 [assembly: System.Reflection.AssemblyProductAttribute("IsekaiStatusMaker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IsekaiStatusMaker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
