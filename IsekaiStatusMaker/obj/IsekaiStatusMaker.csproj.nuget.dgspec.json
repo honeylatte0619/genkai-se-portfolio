@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\IsekaiStatusMaker.csproj": {}
+    "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\IsekaiStatusMaker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\IsekaiStatusMaker.csproj": {
+    "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\IsekaiStatusMaker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\IsekaiStatusMaker.csproj",
+        "projectUniqueName": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\IsekaiStatusMaker.csproj",
         "projectName": "IsekaiStatusMaker",
-        "projectPath": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\IsekaiStatusMaker.csproj",
+        "projectPath": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\IsekaiStatusMaker.csproj",
         "packagesPath": "C:\\Users\\honey\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\obj\\",
+        "outputPath": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\honey\\AppData\\Roaming\\NuGet\\NuGet.Config"
