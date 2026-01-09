@@ -100,7 +100,7 @@ window.novelPromo = {
             ctx.fillStyle = '#ffffff';
             ctx.font = '20px "Noto Sans JP", sans-serif';
 
-            const lines = this.wrapText(ctx, state.text, winX + 20, winW - 40);
+            const lines = this.wrapText(ctx, state.text, winW - 40);
             const totalChars = state.text.length;
             const visibleChars = Math.floor(totalChars * state.progress); // 0.0 to 1.0
 
@@ -185,7 +185,7 @@ window.novelPromo = {
                     quality: 10,
                     width: this.canvas.width,
                     height: this.canvas.height,
-                    workerScript: 'js/gif.worker.js'
+                    workerScript: '/isekai-status-maker/js/gif.worker.js'
                 });
 
                 const totalFrames = config.totalFrames || 50;
