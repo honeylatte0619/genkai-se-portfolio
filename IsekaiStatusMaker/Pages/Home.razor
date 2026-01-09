@@ -1,0 +1,360 @@
+﻿@page "/"
+@using IsekaiStatusMaker.Models
+@inject IJSRuntime JSRuntime
+
+<PageTitle>異世界ステータスメーカー</PageTitle>
+
+<style>
+    .glass-card {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .rainbow-text {
+        background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff);
+        background-size: 200% auto;
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: rainbow 3s linear infinite;
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    @@keyframes rainbow {
+        to {
+            background-position: 200% center;
+        }
+    }
+
+    .cyber-font {
+        font-family: 'Orbitron', 'Noto Sans JP', sans-serif;
+    }
+    
+    .status-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background-size: cover;
+        background-position: center;
+        filter: blur(8px) brightness(0.4);
+        transition: background-image 0.5s ease;
+    }
+    
+    .char-img {
+        position: absolute;
+        bottom: 0;
+        right: -20px;
+        height: 90%;
+        max-height: 500px;
+        z-index: 1;
+        mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        opacity: 0.9;
+        transition: all 0.5s ease;
+    }
+    
+    .status-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .radar-chart-svg text {
+        fill: #00e5ff;
+        font-family: 'Orbitron', 'Noto Sans JP', sans-serif;
+        font-size: 12px;
+        text-anchor: middle;
+    }
+    
+    .radar-polygon {
+        fill: rgba(0, 229, 255, 0.2);
+        stroke: #00e5ff;
+        stroke-width: 2;
+        filter: drop-shadow(0 0 4px #00e5ff);
+    }
+    
+    .radar-grid {
+        fill: none;
+        stroke: rgba(0, 229, 255, 0.1);
+        stroke-width: 1;
+    }
+</style>
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudGrid>
+        <!-- Left Column: Controls -->
+        <MudItem xs="12" md="4">
+            <MudPaper Class="pa-4 glass-card" Elevation="0">
+                <MudText Typo="Typo.h5" Class="cyber-font mb-4" Color="Color.Primary">SYSTEM CONSOLE</MudText>
+                
+                <MudTextField @bind-Value="status.Name" Label="名前" Variant="Variant.Outlined" Class="mb-4" />
+                
+                <MudSwitch @bind-Value="IsRealMode" Color="Color.Secondary" Class="mb-4">
+                    @(IsRealMode ? "モード: 限界SE (現実)" : "モード: ファンタジー (異世界)")
+                </MudSwitch>
+
+                <MudDivider Class="my-4" />
+
+                <!-- Sliders -->
+                <div class="d-flex align-center mb-2">
+                    <MudText Class="mr-2" Style="width: 100px;">@GetLabel("STR")</MudText>
+                    <MudSlider Value="@status.STR" ValueChanged="@((int v) => UpdateStat("STR", v))" Min="0" Max="1000" Step="10" Color="Color.Primary" Class="flex-grow-1" ValueLabel="true" />
+                </div>
+                <div class="d-flex align-center mb-2">
+                    <MudText Class="mr-2" Style="width: 100px;">@GetLabel("VIT")</MudText>
+                    <MudSlider Value="@status.VIT" ValueChanged="@((int v) => UpdateStat("VIT", v))" Min="0" Max="1000" Step="10" Color="Color.Primary" Class="flex-grow-1" ValueLabel="true" />
+                </div>
+                <div class="d-flex align-center mb-2">
+                    <MudText Class="mr-2" Style="width: 100px;">@GetLabel("INT")</MudText>
+                    <MudSlider Value="@status.INT" ValueChanged="@((int v) => UpdateStat("INT", v))" Min="0" Max="1000" Step="10" Color="Color.Primary" Class="flex-grow-1" ValueLabel="true" />
+                </div>
+                <div class="d-flex align-center mb-2">
+                    <MudText Class="mr-2" Style="width: 100px;">@GetLabel("MND")</MudText>
+                    <MudSlider Value="@status.MND" ValueChanged="@((int v) => UpdateStat("MND", v))" Min="0" Max="1000" Step="10" Color="Color.Primary" Class="flex-grow-1" ValueLabel="true" />
+                </div>
+                <div class="d-flex align-center mb-2">
+                    <MudText Class="mr-2" Style="width: 100px;">@GetLabel("AGI")</MudText>
+                    <MudSlider Value="@status.AGI" ValueChanged="@((int v) => UpdateStat("AGI", v))" Min="0" Max="1000" Step="10" Color="Color.Primary" Class="flex-grow-1" ValueLabel="true" />
+                </div>
+                <div class="d-flex align-center mb-2">
+                    <MudText Class="mr-2" Style="width: 100px;">@GetLabel("LUK")</MudText>
+                    <MudSlider Value="@status.LUK" ValueChanged="@((int v) => UpdateStat("LUK", v))" Min="0" Max="1000" Step="10" Color="Color.Primary" Class="flex-grow-1" ValueLabel="true" />
+                </div>
+
+                <MudButton Variant="Variant.Filled" Color="Color.Secondary" FullWidth="true" OnClick="Randomize" Class="mt-4 cyber-font">
+                    転生ガチャ (Randomize)
+                </MudButton>
+                
+                <MudDivider Class="my-4" />
+                
+                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
+                    <ActivatorContent>
+                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload" FullWidth="true">
+                            画像をアップロード
+                        </MudButton>
+                    </ActivatorContent>
+                </MudFileUpload>
+            </MudPaper>
+        </MudItem>
+
+        <!-- Right Column: Preview -->
+        <MudItem xs="12" md="8">
+             <div class="d-flex justify-end mb-2">
+                 <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download" OnClick="DownloadImage">
+                     召喚状を発行 (Download)
+                 </MudButton>
+             </div>
+             
+             <!-- Capture Area -->
+             <div id="status-card" class="glass-card pa-6" style="min-height: 500px;">
+                 <!-- Background Layer -->
+                 <div class="status-bg" style="@(string.IsNullOrEmpty(UploadedImage) ? "background-color: #0f172a;" : $"background-image: url('{UploadedImage}');")"></div>
+                 
+                 <!-- Character Image Layer -->
+                 @if (!string.IsNullOrEmpty(UploadedImage))
+                 {
+                     <img src="@UploadedImage" class="char-img" alt="Character" />
+                 }
+                 else
+                 {
+                     <MudIcon Icon="@Icons.Material.Filled.Person" Style="position: absolute; bottom: 0; right: 20px; font-size: 400px; color: rgba(255,255,255,0.1); z-index: 1;" />
+                 }
+
+                 <!-- Content Layer -->
+                 <div class="status-content">
+                     <MudGrid>
+                         <MudItem xs="12" sm="6">
+                             <MudText Typo="Typo.caption" Class="cyber-font" Color="Color.Secondary">ID: @Guid.NewGuid().ToString().Substring(0, 8).ToUpper()</MudText>
+                             <MudText Typo="Typo.h3" Class="cyber-font mt-2 text-shadow">@status.Name</MudText>
+                             
+                             <div class="mt-4">
+                                 <MudText Typo="Typo.h6" Class="cyber-font">Title / 二つ名</MudText>
+                                 <MudText Typo="Typo.h4" Class="@((status.Rank == "SSS" ? "rainbow-text" : "") + " cyber-font")">@status.Title</MudText>
+                             </div>
+                             
+                             <div class="mt-4">
+                                 <MudText Typo="Typo.h6" Class="cyber-font">Rank</MudText>
+                                 <MudText Typo="Typo.h1" Class="@(GetRankColorClass(status.Rank) + " cyber-font")" Style="font-size: 4rem;">@status.Rank</MudText>
+                             </div>
+                         </MudItem>
+                         
+                         <MudItem xs="12" sm="6" Class="d-flex justify-center align-center">
+                             <!-- SVG Radar Chart -->
+                             <svg width="300" height="300" viewBox="0 0 300 300" class="radar-chart-svg">
+                                 <!-- Grid Lines -->
+                                 @for (int i = 1; i <= 5; i++)
+                                 {
+                                     <polygon points="@GetGridPoints(i * 200)" class="radar-grid" />
+                                 }
+                                 
+                                 <!-- Data Polygon -->
+                                 <polygon points="@GetDataPoints()" class="radar-polygon" />
+                                 
+                                 <!-- Labels -->
+                                 @foreach (var (label, point) in GetLabelPoints())
+                                 {
+                                     @((MarkupString)$"<text x='{point.X}' y='{point.Y}' dy='5'>{label}</text>")
+                                 }
+                             </svg>
+                         </MudItem>
+                     </MudGrid>
+                     
+                     <!-- Stats Detail -->
+                     <MudGrid Class="mt-4">
+                         @foreach (var stat in StatsList)
+                         {
+                             <MudItem xs="6" sm="4">
+                                 <MudText Typo="Typo.body2" Color="Color.Secondary">@GetLabel(stat)</MudText>
+                                 <MudText Typo="Typo.h5" Class="cyber-font">@GetStatValue(stat)</MudText>
+                                 <MudProgressLinear Color="@(GetStatValue(stat) > 900 ? Color.Secondary : Color.Primary)" Value="@(GetStatValue(stat) / 10.0)" Class="my-1" />
+                             </MudItem>
+                         }
+                     </MudGrid>
+                 </div>
+             </div>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private StatusModel status = new StatusModel();
+    private bool IsRealMode = false;
+    private string UploadedImage = "";
+    
+    // Stats definitions for order
+    private string[] StatsList = { "STR", "VIT", "INT", "MND", "AGI", "LUK" };
+    
+    protected override void OnInitialized()
+    {
+        status.Randomize(); // Initial random
+    }
+
+    private void Randomize()
+    {
+        status.Randomize();
+    }
+    
+    private void UpdateStat(string stat, int value)
+    {
+        switch (stat)
+        {
+            case "STR": status.STR = value; break;
+            case "VIT": status.VIT = value; break;
+            case "INT": status.INT = value; break;
+            case "MND": status.MND = value; break;
+            case "AGI": status.AGI = value; break;
+            case "LUK": status.LUK = value; break;
+        }
+        status.Calculate();
+    }
+    
+    private string GetLabel(string stat)
+    {
+        return IsRealMode ? StatusModel.GenkaiLabels[stat] : StatusModel.FantasyLabels[stat].Split(' ')[0];
+    }
+    
+    private int GetStatValue(string stat)
+    {
+        return stat switch
+        {
+            "STR" => status.STR,
+            "VIT" => status.VIT,
+            "INT" => status.INT,
+            "MND" => status.MND,
+            "AGI" => status.AGI,
+            "LUK" => status.LUK,
+            _ => 0
+        };
+    }
+
+    private async Task UploadFiles(IBrowserFile file)
+    {
+        if (file.ContentType.StartsWith("image/"))
+        {
+            try
+            {
+                var resizedFile = await file.RequestImageFileAsync(file.ContentType, 800, 800);
+                var buffer = new byte[resizedFile.Size];
+                await resizedFile.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024).ReadAsync(buffer);
+                UploadedImage = $"data:{file.ContentType};base64,{Convert.ToBase64String(buffer)}";
+            }
+            catch
+            {
+                // Ignore errors
+            }
+        }
+    }
+    
+    private async Task DownloadImage()
+    {
+        await JSRuntime.InvokeVoidAsync("downloadCard", "status-card", $"{status.Name}_status.png");
+    }
+    
+    private string GetRankColorClass(string rank)
+    {
+        return rank switch
+        {
+            "SSS" => "rainbow-text",
+            "SS" => "mud-text-secondary",
+            "S" => "mud-text-secondary",
+            "A" => "mud-text-warning",
+            _ => "mud-text-primary"
+        };
+    }
+    
+    // SVG Radar Chart Logic
+    private struct Point { public double X; public double Y; }
+    
+    private Point GetPoint(int index, double value, double max)
+    {
+        // Center: 150, 150. Radius: 100 max
+        double cx = 150;
+        double cy = 150;
+        double r = (value / max) * 100;
+        double angle = (index * 60 - 90) * Math.PI / 180.0; // -90 to start from top
+        return new Point { X = cx + r * Math.Cos(angle), Y = cy + r * Math.Sin(angle) };
+    }
+    
+    private string GetDataPoints()
+    {
+        var points = new List<string>();
+        for (int i = 0; i < 6; i++)
+        {
+            var val = GetStatValue(StatsList[i]);
+            var p = GetPoint(i, val, 1000.0);
+            points.Add($"{p.X},{p.Y}");
+        }
+        return string.Join(" ", points);
+    }
+    
+    private string GetGridPoints(double value)
+    {
+        var points = new List<string>();
+        for (int i = 0; i < 6; i++)
+        {
+            var p = GetPoint(i, value, 1000.0);
+            points.Add($"{p.X},{p.Y}");
+        }
+        return string.Join(" ", points);
+    }
+    
+    private List<(string Label, Point Point)> GetLabelPoints()
+    {
+        var list = new List<(string, Point)>();
+        for (int i = 0; i < 6; i++)
+        {
+            var p = GetPoint(i, 1300, 1000.0); // Labels outside chart
+            list.Add((GetLabel(StatsList[i]), p));
+        }
+        return list;
+    }
+}

@@ -1,0 +1,14 @@
+﻿@inherits LayoutComponentBase
+
+<MudLayout>
+    <MudAppBar Elevation="1" Dense="true">
+        <MudText Typo="Typo.h6">異世界ステータスメーカー (限界SE版)</MudText>
+        <MudSpacer />
+        <!-- ポートフォリオサイトへの戻るリンクなどを想定 -->
+    </MudAppBar>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
