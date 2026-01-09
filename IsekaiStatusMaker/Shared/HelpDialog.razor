@@ -1,0 +1,57 @@
+<MudDialog>
+    <DialogContent>
+        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+            <MudTabPanel Text="Status Maker" Icon="@Icons.Material.Filled.Dashboard">
+                <MudText Typo="Typo.h6" GutterBottom="true">異世界ステータスメーカーの使い方</MudText>
+                
+                <MudText Typo="Typo.subtitle1" Color="Color.Primary" Class="mt-4">🎭 2つのモード</MudText>
+                <MudList T="string" Dense="true">
+                    <MudListItem Text="ファンタジーモード: 重厚なRPG風デザイン。正統派な冒険者向け。" Icon="@Icons.Material.Filled.Shield" />
+                    <MudListItem Text="限界SEモード: サイバーパンク×エラー警告風。現代社会で戦うエンジニア向け。" Icon="@Icons.Material.Filled.Computer" />
+                </MudList>
+
+                <MudText Typo="Typo.subtitle1" Color="Color.Secondary" Class="mt-4">🎲 転生ガチャの秘密</MudText>
+                <MudText Typo="Typo.body2">
+                    「ランダム生成」ボタンを押すと、能力値が再計算されます。<br/>
+                    基本的には平凡なステータスになりますが、<b>1%の確率</b>で全能力MAX(999)の「チート転生」が発生します！<br/>
+                    SランクやSSSランクを目指してリセマラしてみましょう。
+                </MudText>
+
+                <MudText Typo="Typo.subtitle1" Color="Color.Info" Class="mt-4">🐦 シェア機能</MudText>
+                <MudText Typo="Typo.body2">
+                    気に入ったステータスができたら、「画像をダウンロード」してから「Xで自慢する」ボタンを押してください。<br/>
+                    自動的にハッシュタグ付きの投稿文が作成されます。ダウンロードした画像を添付して投稿しましょう！
+                </MudText>
+            </MudTabPanel>
+
+            <MudTabPanel Text="Promo Maker" Icon="@Icons.Material.Filled.Movie">
+                 <MudText Typo="Typo.h6" GutterBottom="true">Novel Promo Makerの使い方</MudText>
+                 <MudText Typo="Typo.body2">
+                     あなたのキャラクターが登場する、ノベルゲーム風のアニメーションGIFを作成できます。
+                 </MudText>
+
+                 <MudText Typo="Typo.subtitle1" Color="Color.Warning" Class="mt-4">📝 手順</MudText>
+                 <MudList T="string" Order="ListType.Ordered">
+                     <MudListItem Text="Assets: 背景画像とキャラクター画像をアップロードします。" />
+                     <MudListItem Text="Character: スライダーでキャラの位置や大きさを調整します。" />
+                     <MudListItem Text="Dialogue: 名前とセリフを入力します。再生速度も変更可能です。" />
+                     <MudListItem Text="Export: 「Generate GIF」を押すと、ブラウザ内でアニメーション生成が始まり、完了するとダウンロードされます。" />
+                 </MudList>
+
+                 <MudAlert Severity="Severity.Info" Class="mt-4">
+                     <b>Tips:</b> GIF生成処理は少し時間がかかります（数秒〜十数秒）。<br/>
+                     処理中はページの操作をせずにお待ちください。
+                 </MudAlert>
+            </MudTabPanel>
+        </MudTabs>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Submit" Color="Color.Primary">Close</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+}
