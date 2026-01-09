@@ -24,64 +24,68 @@
         <MudPaper Elevation="3" Class="pa-4">
             <MudText Typo="Typo.h5" Class="mb-4 cyber-font">Control Panel</MudText>
             
-            <MudExpansionPanels MultiExpansion="true">
-                <!-- Assets -->
-                <MudExpansionPanel Text="1. Assets" @bind-Expanded="_assetsExpanded">
-                    <MudFileUpload T="IBrowserFile" FilesChanged="OnBgUpload">
-                        <ActivatorContent>
-                            <MudButton HtmlTag="label"
-                                       Variant="Variant.Filled"
-                                       Color="Color.Primary"
-                                       StartIcon="@Icons.Material.Filled.CloudUpload">
-                                Upload Background
-                            </MudButton>
-                        </ActivatorContent>
-                    </MudFileUpload>
-                    
-                    <MudFileUpload T="IBrowserFile" FilesChanged="OnCharUpload" Class="mt-2">
-                        <ActivatorContent>
-                            <MudButton HtmlTag="label"
-                                       Variant="Variant.Filled"
-                                       Color="Color.Secondary"
-                                       StartIcon="@Icons.Material.Filled.Person">
-                                Upload Character
-                            </MudButton>
-                        </ActivatorContent>
-                    </MudFileUpload>
-                </MudExpansionPanel>
+            <!-- 1. Assets -->
+            <MudText Typo="Typo.h6" Class="mb-2" Color="Color.Primary">1. Assets</MudText>
+            <MudFileUpload T="IBrowserFile" FilesChanged="OnBgUpload">
+                <ActivatorContent>
+                    <MudButton HtmlTag="label"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.CloudUpload"
+                               FullWidth="true">
+                        Upload Background
+                    </MudButton>
+                </ActivatorContent>
+            </MudFileUpload>
+            
+            <MudFileUpload T="IBrowserFile" FilesChanged="OnCharUpload" Class="mt-2">
+                <ActivatorContent>
+                    <MudButton HtmlTag="label"
+                               Variant="Variant.Filled"
+                               Color="Color.Secondary"
+                               StartIcon="@Icons.Material.Filled.Person"
+                               FullWidth="true">
+                        Upload Character
+                    </MudButton>
+                </ActivatorContent>
+            </MudFileUpload>
 
-                <!-- Character Settings -->
-                <MudExpansionPanel Text="2. Character" @bind-Expanded="_characterExpanded">
-                     <MudSlider @bind-Value="CharX" Min="0" Max="854" Step="10" Color="Color.Info">X Position: @CharX</MudSlider>
-                     <MudSlider @bind-Value="CharScale" Min="0.1" Max="2.0" Step="0.1" Color="Color.Info">Scale: @CharScale</MudSlider>
-                     <MudSwitch @bind-Value="CharFlip" Color="Color.Secondary">Flip Horizontal</MudSwitch>
-                </MudExpansionPanel>
+            <MudDivider Class="my-4" />
 
-                <!-- Dialogue -->
-                <MudExpansionPanel Text="3. Dialogue" @bind-Expanded="_dialogueExpanded">
-                    <MudTextField @bind-Value="CharacterName" Label="Character Name" Variant="Variant.Outlined" />
-                    <MudTextField @bind-Value="BodyText" Label="Message Body" Variant="Variant.Outlined" Lines="4" Class="mt-2" />
-                    <MudSlider @bind-Value="CharSpeed" Min="50" Max="300" Step="10" Color="Color.Warning" Class="mt-4">Speed (ms/char)</MudSlider>
-                </MudExpansionPanel>
+            <!-- 2. Character -->
+            <MudText Typo="Typo.h6" Class="mb-2" Color="Color.Info">2. Character</MudText>
+            <MudSlider @bind-Value="CharX" Min="0" Max="854" Step="10" Color="Color.Info">X Position: @CharX</MudSlider>
+            <MudSlider @bind-Value="CharScale" Min="0.1" Max="2.0" Step="0.1" Color="Color.Info">Scale: @CharScale</MudSlider>
+            <MudSwitch @bind-Value="CharFlip" Color="Color.Secondary">Flip Horizontal</MudSwitch>
 
-                <!-- Export -->
-                <MudExpansionPanel Text="4. Export" @bind-Expanded="_exportExpanded">
-                    @if (isGenerating)
-                    {
-                        <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
-                        <MudText>Generating GIF...</MudText>
-                    }
-                    else
-                    {
-                        <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick="GenerateGif" StartIcon="@Icons.Material.Filled.MovieCreation">
-                            Generate GIF
-                        </MudButton>
-                        <MudButton Variant="Variant.Filled" Color="Color.Surface" FullWidth="true" Class="mt-2" OnClick="ShareOnX" StartIcon="@Icons.Custom.Brands.Twitter">
-                            Xで自慢する
-                        </MudButton>
-                    }
-                </MudExpansionPanel>
-            </MudExpansionPanels>
+            <MudDivider Class="my-4" />
+
+            <!-- 3. Dialogue -->
+            <MudText Typo="Typo.h6" Class="mb-2" Color="Color.Warning">3. Dialogue</MudText>
+            <MudTextField @bind-Value="CharacterName" Label="Character Name" Variant="Variant.Outlined" />
+            <MudTextField @bind-Value="BodyText" Label="Message Body" Variant="Variant.Outlined" Lines="4" Class="mt-2" />
+            <MudSlider @bind-Value="CharSpeed" Min="50" Max="300" Step="10" Color="Color.Warning" Class="mt-4">Speed (ms/char)</MudSlider>
+
+            <MudDivider Class="my-4" />
+
+            <!-- 4. Export -->
+            <MudText Typo="Typo.h6" Class="mb-2" Color="Color.Success">4. Export</MudText>
+            @if (isGenerating)
+            {
+                <div class="d-flex align-center gap-2">
+                    <MudProgressCircular Color="Color.Secondary" Indeterminate="true" Size="Size.Small" />
+                    <MudText>Generating GIF...</MudText>
+                </div>
+            }
+            else
+            {
+                <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick="GenerateGif" StartIcon="@Icons.Material.Filled.MovieCreation">
+                    Generate GIF
+                </MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Surface" FullWidth="true" Class="mt-2" OnClick="ShareOnX" StartIcon="@Icons.Custom.Brands.Twitter">
+                    Xで自慢する
+                </MudButton>
+            }
         </MudPaper>
     </MudItem>
 </MudGrid>
@@ -138,12 +142,6 @@
 
     private bool isGenerating = false;
     private bool isInitialized = false;
-
-    // Panel Expansion States
-    private bool _assetsExpanded = true;
-    private bool _characterExpanded = false;
-    private bool _dialogueExpanded = false;
-    private bool _exportExpanded = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

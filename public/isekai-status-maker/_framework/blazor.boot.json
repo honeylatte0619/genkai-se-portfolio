@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "IsekaiStatusMaker",
   "resources": {
-    "hash": "sha256-kS11eSsmHFildydE2LvQsf61XjgpTkCzGag3CJcy1yQ=",
+    "hash": "sha256-vB8KY/Mwg27w8tnaGERgX53mFVVtQgdr6FD/5auxf58=",
     "jsModuleNative": {
       "dotnet.native.8.0.22.uftlfveqmd.js": "sha256-vtotCeXt2UD6oc459laJT32vBgigZ+eLoUmdeFkvYDk="
     },
@@ -17,7 +17,7 @@
       "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
     },
     "assembly": {
-      "IsekaiStatusMaker.wasm": "sha256-Ovj7wm9aDVtI5glNbbosxagVCuss95RaghSdcMUEJcw=",
+      "IsekaiStatusMaker.wasm": "sha256-Fo8sTeD4BuEb2sHqS3BiF9A/fCYfm1adhV7W9wrgh9E=",
       "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-Bn7MV/qHZi2UIq/pKpy97/xkF1ajAJNTORpiJHIHWdY=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-4FnBDWUzInUlD0Y0bB1LifXpV7WiBCCJYm2G+38xZPU=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-0dmoIB5iD3gqd1Eq5QggkmStpnH+1tSYWNclk1oH4Qw=",
@@ -35,7 +35,7 @@
       "Microsoft.Extensions.Primitives.wasm": "sha256-Ms2HR5Gpug/0uRAzdk4SUNT76Ml3CjFv9Jo+dUIMGac=",
       "Microsoft.JSInterop.wasm": "sha256-x6WSjOCdsxl68j89k1OiDhYurSUSvPdUnEi5GKa+F38=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-UbKsaDaH8XRDrreQmUsdfmb7DdXFV2gQj61+h2MSKi8=",
-      "MudBlazor.wasm": "sha256-6s3NBZ0Scr7UQn+BIG/1V8X0yPDRvpe+Gp3EG7HW+xs=",
+      "MudBlazor.wasm": "sha256-htbcdVHmF6DWSEyOcQgsM0KrwZPwepQFi1ORT++a+Io=",
       "System.Collections.Concurrent.wasm": "sha256-pLhN37+hrRmaCrhrEF7V1Xi6sUbw6/Ksnls6vh52cQM=",
       "System.Collections.Immutable.wasm": "sha256-xjgRgqr81P81/Y8IwDMoui8+7rNw62CdPSs2qmFFz6g=",
       "System.Collections.wasm": "sha256-3ffH5xlRQH0oGqcoZW00FrhMmQ25thse+ujzUhqV47I=",
