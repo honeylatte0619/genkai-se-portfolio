@@ -1,0 +1,324 @@
+@page "/virtual-bunko"
+@inject IJSRuntime JSRuntime
+@using System.IO
+
+<PageTitle>Virtual Bunko Press</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-4 cyber-font" Color="Color.Primary">Virtual Bunko Press</MudText>
+
+<MudGrid>
+    <!-- Editor Column -->
+    <MudItem xs="12" md="5">
+        <MudPaper Elevation="3" Class="pa-4">
+            <MudText Typo="Typo.h6" Class="mb-4">Editor</MudText>
+
+            <!-- 1. Background Image -->
+            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="mt-4">1. Cover Illustration</MudText>
+            <MudFileUpload T="IBrowserFile" FilesChanged="OnImageUpload" Accept=".png, .jpg, .jpeg">
+                <ActivatorContent>
+                    <MudButton HtmlTag="label"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.Image"
+                               FullWidth="true">
+                        Select Image
+                    </MudButton>
+                </ActivatorContent>
+            </MudFileUpload>
+
+            <MudDivider Class="my-4" />
+
+            <!-- 2. Title Settings -->
+            <MudText Typo="Typo.subtitle2" Color="Color.Info" Class="mt-4">2. Title Settings</MudText>
+            <MudTextField @bind-Value="TitleText" Label="Title" Variant="Variant.Outlined" Lines="2" />
+            
+            <MudGrid Class="mt-2">
+                <MudItem xs="6">
+                    <MudSelect T="string" Label="Font" @bind-Value="SelectedFont" Variant="Variant.Outlined" Dense="true">
+                        <MudSelectItem Value="@("Shippori Mincho")">Mincho (Fantasy)</MudSelectItem>
+                        <MudSelectItem Value="@("Mochiy Pop One")">Pop (LoveCom)</MudSelectItem>
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudColorPicker Label="Text Color" @bind-Text="TitleColor" Style="@($"color: {TitleColor};")" Placeholder="Select Color" />
+                </MudItem>
+            </MudGrid>
+            <MudColorPicker Label="Outline Color" @bind-Text="TitleOutlineColor" Style="@($"color: {TitleOutlineColor};")" Class="mt-2" />
+
+            <MudSlider @bind-Value="TitleSize" Min="1.0" Max="5.0" Step="0.1" Color="Color.Info" Class="mt-2">Size: @TitleSize rem</MudSlider>
+            <MudSlider @bind-Value="TitleX" Min="0" Max="100" Step="1" Color="Color.Info">X: @TitleX %</MudSlider>
+            <MudSlider @bind-Value="TitleY" Min="0" Max="100" Step="1" Color="Color.Info">Y: @TitleY %</MudSlider>
+
+            <MudDivider Class="my-4" />
+
+            <!-- 3. Logo Settings -->
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary" Class="mt-4">3. Bunko Label</MudText>
+            <MudSelect T="string" Label="Label" @bind-Value="SelectedLabel" Variant="Variant.Outlined" Dense="true">
+                <MudSelectItem Value="@("GENKAI Bunko")">GENKAI Bunko (限界文庫)</MudSelectItem>
+                <MudSelectItem Value="@("CYBER Sneaker")">CYBER Sneaker (電脳スニーカー)</MudSelectItem>
+                <MudSelectItem Value="@("Phantom Novel")">Phantom Novel (幻影ノベル)</MudSelectItem>
+            </MudSelect>
+
+            <MudDivider Class="my-4" />
+
+            <!-- 4. Obi Settings -->
+            <MudText Typo="Typo.subtitle2" Color="Color.Warning" Class="mt-4">4. Obi (Band)</MudText>
+            <MudSwitch @bind-Value="ShowObi" Color="Color.Success">Show Obi</MudSwitch>
+            
+            @if(ShowObi)
+            {
+                <MudTextField @bind-Value="ObiMainText" Label="Catchphrase (Main)" Variant="Variant.Outlined" Class="mt-2" />
+                <MudTextField @bind-Value="ObiSubText" Label="Sub Text" Variant="Variant.Outlined" Class="mt-2" />
+                <MudSelect T="string" Label="Color" @bind-Value="ObiColor" Variant="Variant.Outlined" Dense="true" Class="mt-2">
+                     <MudSelectItem Value="@("radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)")">Pastel Gradient</MudSelectItem>
+                     <MudSelectItem Value="@("#ef4444")">Burning Red</MudSelectItem>
+                     <MudSelectItem Value="@("#eab308")">Lightning Yellow</MudSelectItem>
+                     <MudSelectItem Value="@("#3b82f6")">Cyber Blue</MudSelectItem>
+                     <MudSelectItem Value="@("#000000")">Abyss Black</MudSelectItem>
+                </MudSelect>
+            }
+             <MudDivider Class="my-4" />
+             <!-- 5. Author -->
+             <MudText Typo="Typo.subtitle2" Class="mt-4">5. Author Name</MudText>
+             <MudTextField @bind-Value="AuthorName" Label="Author" Variant="Variant.Outlined" />
+
+            <MudDivider Class="my-4" />
+
+            <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick="ExportImage" StartIcon="@Icons.Material.Filled.Save" Class="py-3">
+                Publish (Save Image)
+            </MudButton>
+
+        </MudPaper>
+    </MudItem>
+
+    <!-- Preview Column -->
+    <MudItem xs="12" md="7" Class="d-flex justify-center align-start bg-dark pa-4" Style="min-height: 600px;">
+        <!-- Book Wrapper (for 3D effect) -->
+        <div class="book-wrapper">
+             <div class="book-cover" id="bunko-preview">
+                 <!-- Background Image -->
+                 @if (!string.IsNullOrEmpty(BgImageData))
+                 {
+                     <img src="@BgImageData" class="cover-image" />
+                 }
+                 else
+                 {
+                     <div class="cover-placeholder d-flex align-center justify-center">
+                         <MudIcon Icon="@Icons.Material.Filled.Image" Size="Size.Large" Color="Color.Dark" />
+                     </div>
+                 }
+
+                 <!-- Logo -->
+                 <div class="logo-area @GetLogoClass()">
+                     <div class="logo-text">@SelectedLabel</div>
+                 </div>
+
+                 <!-- Title -->
+                 <div class="title-area" style="@GetTitleStyle()">
+                     @TitleText
+                 </div>
+
+                 <!-- Author -->
+                  <div class="author-area">
+                     @AuthorName
+                 </div>
+
+                 <!-- Obi -->
+                 @if (ShowObi)
+                 {
+                     <div class="obi-area" style="background: @ObiColor;">
+                         <div class="obi-main">@ObiMainText</div>
+                         <div class="obi-sub">@ObiSubText</div>
+                     </div>
+                 }
+             </div>
+             <!-- Spine Effect -->
+             <div class="book-spine"></div>
+        </div>
+    </MudItem>
+</MudGrid>
+
+<style>
+    .bg-dark { background-color: #0f172a; }
+    .cyber-font { font-family: 'Orbitron', sans-serif; }
+
+    /* Book CSS */
+    .book-wrapper {
+        position: relative;
+        width: 350px; /* A6 Ratio Base: 105mm ~ 396px, scaled down */
+        height: 495px; /* 148mm ~ 559px */
+        perspective: 1000px;
+        filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.5));
+    }
+
+    .book-cover {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        position: relative;
+        overflow: hidden;
+        border-radius: 2px 5px 5px 2px;
+        /* Make sure html2canvas captures this bg */
+        z-index: 1; 
+    }
+
+    .book-spine {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 10px;
+        height: 100%;
+        background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(0,0,0,0.2));
+        z-index: 10;
+        pointer-events: none;
+        border-radius: 2px 0 0 2px;
+    }
+
+    .cover-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+    }
+
+    .cover-placeholder {
+        width: 100%;
+        height: 100%;
+        background-color: #e2e8f0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+    }
+
+    .logo-area {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0,0,0,0.7);
+        color: #fff;
+        padding: 4px 8px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.8rem;
+        border: 1px solid #fff;
+        z-index: 5;
+    }
+    
+    .logo-area.genkai { border-color: #ff00de; color: #ff00de; }
+    .logo-area.sneaker { border-color: #00ffff; color: #00ffff; }
+    .logo-area.phantom { border-color: #a855f7; color: #a855f7; }
+
+    .title-area {
+        position: absolute;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        top: 50px;
+        right: 40px; /* Base pos, adjustable */
+        font-weight: bold;
+        white-space: pre-wrap;
+        line-height: 1.2;
+        z-index: 4;
+        /* Shadow/Stroke Logic handled in inline style */
+    }
+
+    .author-area {
+        position: absolute;
+        bottom: 120px; /* Above Obi */
+        left: 20px;
+        color: #fff;
+        font-family: 'Noto Sans JP', sans-serif;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px #000;
+        z-index: 4;
+    }
+
+    .obi-area {
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        width: 100%;
+        height: 25%;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+        z-index: 6; /* Above Title */
+        transform: skewY(-2deg); /* Stylish tilt */
+        transform-origin: bottom right;
+        width: 105%; /* Compensate skew */
+        left: -2.5%;
+    }
+
+    .obi-main {
+        font-size: 1.4rem;
+        font-weight: 900;
+        margin-bottom: 4px;
+        font-family: 'Noto Sans JP', sans-serif;
+        text-shadow: 2px 2px 0px #000;
+    }
+    
+    .obi-sub {
+        font-size: 0.9rem;
+        font-family: 'Noto Sans JP', sans-serif;
+        text-shadow: 1px 1px 2px #000;
+    }
+
+</style>
+
+@code {
+    private string BgImageData = "";
+    private string TitleText = "転生したら\n限界SEだった件";
+    private string SelectedFont = "Shippori Mincho";
+    private string TitleColor = "#ffffff";
+    private string TitleOutlineColor = "#000000";
+    private double TitleSize = 2.5;
+    private double TitleX = 80; // Right aligned essentially
+    private double TitleY = 15;
+    
+    private string SelectedLabel = "GENKAI Bunko";
+    
+    private bool ShowObi = true;
+    private string ObiMainText = "「定時退社は都市伝説!?」";
+    private string ObiSubText = "全米が泣いた(デバッグで)";
+    private string ObiColor = "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)";
+    
+    private string AuthorName = "著: 迷える子羊 / Illust: AI";
+
+    private async Task OnImageUpload(IBrowserFile file)
+    {
+        if (file.Size > 10 * 1024 * 1024) return;
+        using var stream = file.OpenReadStream(10 * 1024 * 1024);
+        using var ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        var base64 = Convert.ToBase64String(ms.ToArray());
+        BgImageData = $"data:{file.ContentType};base64,{base64}";
+    }
+
+    private string GetLogoClass()
+    {
+        return SelectedLabel switch
+        {
+            "GENKAI Bunko" => "genkai",
+            "CYBER Sneaker" => "sneaker",
+            "Phantom Novel" => "phantom",
+            _ => ""
+        };
+    }
+
+    private string GetTitleStyle()
+    {
+        var strokeStyle = $"-webkit-text-stroke: 1px {TitleOutlineColor}; text-shadow: 2px 2px 0 {TitleOutlineColor};";
+        return $"font-family: '{SelectedFont}', serif; color: {TitleColor}; font-size: {TitleSize}rem; right: {100 - TitleX}%; top: {TitleY}%; {strokeStyle}";
+    }
+
+    private async Task ExportImage()
+    {
+        await JSRuntime.InvokeVoidAsync("downloadCard", "bunko-preview", "virtual-bunko-cover.png");
+    }
+}
