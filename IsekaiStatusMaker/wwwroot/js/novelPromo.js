@@ -184,7 +184,8 @@ window.novelPromo = {
                     workers: 2,
                     quality: 10,
                     width: this.canvas.width,
-                    height: this.canvas.height
+                    height: this.canvas.height,
+                    workerScript: 'js/gif.worker.js'
                 });
 
                 const totalFrames = config.totalFrames || 50;

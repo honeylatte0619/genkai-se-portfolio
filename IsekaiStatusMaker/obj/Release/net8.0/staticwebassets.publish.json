@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HRgiTBekIa6b6ZPEb2SZDhGDY/zFKA6UoirCCTqfnDo=",
+  "Hash": "hUPwBQs9kN7HsixtUzm968r+VxUqZmTg5dEHgDooK+4=",
   "Source": "IsekaiStatusMaker",
   "BasePath": "/",
   "Mode": "Root",
@@ -3188,6 +3188,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\gif.worker.js",
+      "SourceId": "IsekaiStatusMaker",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "js/gif.worker.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\gif.worker.js"
     },
     {
       "Identity": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\novelPromo.js",
