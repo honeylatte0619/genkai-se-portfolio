@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bfSTkULW8lyjkasm/7nQMLUP/jHJDCcWsA4eMfKu4Pk=",
+  "Hash": "tnov3KfPnFX4TZ++DyfTRl4tJmsLMAKOdMyO/szOnpo=",
   "Source": "IsekaiStatusMaker",
   "BasePath": "/",
   "Mode": "Root",
@@ -8071,6 +8071,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\novelPromo.js",
+      "SourceId": "IsekaiStatusMaker",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "js/novelPromo.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\novelPromo.js"
     },
     {
       "Identity": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\sample-data\\weather.json",

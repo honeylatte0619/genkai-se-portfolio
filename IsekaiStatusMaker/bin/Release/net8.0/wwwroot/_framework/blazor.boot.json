@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "IsekaiStatusMaker",
   "resources": {
-    "hash": "sha256-sHQmVPb9QBw/bDXR9NkwiHvaMz6pMEpFf7LY532DynA=",
+    "hash": "sha256-z1fivudRUCNuPXWkuNeN1/ErlLtEy2ULxAEwULgaKqU=",
     "jsModuleNative": {
       "dotnet.native.8.0.22.uftlfveqmd.js": "sha256-vtotCeXt2UD6oc459laJT32vBgigZ+eLoUmdeFkvYDk="
     },
@@ -211,10 +211,10 @@
       "mscorlib.wasm": "sha256-K9gNrsN9UmPqLs6J/FrkiKpmkVGnHjjqUsc7YGvesCY=",
       "netstandard.wasm": "sha256-4emjlXLM9qW3t2tlII20SDylBgG4ueI0wy9nh5FMd8g=",
       "System.Private.CoreLib.wasm": "sha256-2DN4v7I/tabltDEPdIO8sDBB0tY8zOm+0CvHbMssXW4=",
-      "IsekaiStatusMaker.wasm": "sha256-8aEQ6f1gRhERrfRPBAYsF2qTtHZ9dwLJRmzFiDcNmZ8="
+      "IsekaiStatusMaker.wasm": "sha256-rT50TYw6JKBlPZ7U+xALat1OCERRpuTPcyMQpLSr5sY="
     },
     "pdb": {
-      "IsekaiStatusMaker.pdb": "sha256-V0tU2ifsug82cB0klNAXTvZQCIi7kQIy+vwD+llxZ64="
+      "IsekaiStatusMaker.pdb": "sha256-FvsHn/SbAyPHqZ7+52VZWC+PLJ8bQg7o9QP+GXMHiK8="
     }
   },
   "cacheBootResources": true,

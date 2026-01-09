@@ -27,27 +27,25 @@
                 <!-- Assets -->
                 <MudExpansionPanel Text="1. Assets" IsExpanded="true">
                     <MudFileUpload T="IBrowserFile" FilesChanged="OnBgUpload">
-                        <ButtonTemplate>
+                        <ActivatorContent>
                             <MudButton HtmlTag="label"
                                        Variant="Variant.Filled"
                                        Color="Color.Primary"
-                                       StartIcon="@Icons.Material.Filled.CloudUpload"
-                                       for="@context.Id">
+                                       StartIcon="@Icons.Material.Filled.CloudUpload">
                                 Upload Background
                             </MudButton>
-                        </ButtonTemplate>
+                        </ActivatorContent>
                     </MudFileUpload>
                     
                     <MudFileUpload T="IBrowserFile" FilesChanged="OnCharUpload" Class="mt-2">
-                        <ButtonTemplate>
+                        <ActivatorContent>
                             <MudButton HtmlTag="label"
                                        Variant="Variant.Filled"
                                        Color="Color.Secondary"
-                                       StartIcon="@Icons.Material.Filled.Person"
-                                       for="@context.Id">
+                                       StartIcon="@Icons.Material.Filled.Person">
                                 Upload Character
                             </MudButton>
-                        </ButtonTemplate>
+                        </ActivatorContent>
                     </MudFileUpload>
                 </MudExpansionPanel>
 

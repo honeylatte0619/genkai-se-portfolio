@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
+      "Id": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\novelPromo.js",
+      "PackagePath": "staticwebassets\\js\\novelPromo.js"
+    },
+    {
       "Id": "C:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\sample-data\\weather.json",
       "PackagePath": "staticwebassets\\sample-data\\weather.json"
     },
