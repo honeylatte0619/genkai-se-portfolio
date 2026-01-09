@@ -140,11 +140,16 @@
                 <MudDivider Class="my-4" />
                 
                 <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles">
-                    <ActivatorContent>
-                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload" FullWidth="true">
-                            画像をアップロード
-                        </MudButton>
-                    </ActivatorContent>
+                <ButtonTemplate>
+                    <MudButton HtmlTag="label"
+                               Variant="Variant.Outlined"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.CloudUpload"
+                               FullWidth="true"
+                               for="@context">
+                        画像をアップロード
+                    </MudButton>
+                </ButtonTemplate>
                 </MudFileUpload>
             </MudPaper>
         </MudItem>

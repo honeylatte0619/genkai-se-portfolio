@@ -15,15 +15,16 @@
             <!-- 1. Background Image -->
             <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="mt-4">1. Cover Illustration</MudText>
             <MudFileUpload T="IBrowserFile" FilesChanged="OnImageUpload" Accept=".png, .jpg, .jpeg">
-                <ActivatorContent>
+                <ButtonTemplate>
                     <MudButton HtmlTag="label"
                                Variant="Variant.Filled"
                                Color="Color.Primary"
                                StartIcon="@Icons.Material.Filled.Image"
-                               FullWidth="true">
+                               FullWidth="true"
+                               for="@context">
                         Select Image
                     </MudButton>
-                </ActivatorContent>
+                </ButtonTemplate>
             </MudFileUpload>
 
             <MudDivider Class="my-4" />

@@ -27,27 +27,29 @@
             <!-- 1. Assets -->
             <MudText Typo="Typo.h6" Class="mb-2" Color="Color.Primary">1. Assets</MudText>
             <MudFileUpload T="IBrowserFile" FilesChanged="OnBgUpload">
-                <ActivatorContent>
+                <ButtonTemplate>
                     <MudButton HtmlTag="label"
                                Variant="Variant.Filled"
                                Color="Color.Primary"
                                StartIcon="@Icons.Material.Filled.CloudUpload"
-                               FullWidth="true">
+                               FullWidth="true"
+                               for="@context">
                         Upload Background
                     </MudButton>
-                </ActivatorContent>
+                </ButtonTemplate>
             </MudFileUpload>
             
             <MudFileUpload T="IBrowserFile" FilesChanged="OnCharUpload" Class="mt-2">
-                <ActivatorContent>
+                <ButtonTemplate>
                     <MudButton HtmlTag="label"
                                Variant="Variant.Filled"
                                Color="Color.Secondary"
                                StartIcon="@Icons.Material.Filled.Person"
-                               FullWidth="true">
+                               FullWidth="true"
+                               for="@context">
                         Upload Character
                     </MudButton>
-                </ActivatorContent>
+                </ButtonTemplate>
             </MudFileUpload>
 
             <MudDivider Class="my-4" />
