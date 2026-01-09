@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\IsekaiStatusMaker.props" />
-</Project>

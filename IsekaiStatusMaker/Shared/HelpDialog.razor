@@ -1,6 +1,13 @@
 @using MudBlazor
-<MudDialog>
+<MudDialog Class="opaque-dialog">
     <DialogContent>
+        <style>
+            .opaque-dialog .mud-dialog {
+                background-color: #0f172a !important;
+                border: 1px solid rgba(0, 229, 255, 0.3); /* Cyan border accent */
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            }
+        </style>
         <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
             <MudTabPanel Text="Status Maker" Icon="@Icons.Material.Filled.Dashboard">
                 <MudText Typo="Typo.h6" GutterBottom="true">異世界ステータスメーカーの使い方</MudText>

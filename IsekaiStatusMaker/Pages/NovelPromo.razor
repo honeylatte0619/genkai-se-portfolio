@@ -25,7 +25,7 @@
             
             <MudExpansionPanels MultiExpansion="true">
                 <!-- Assets -->
-                <MudExpansionPanel Text="1. Assets" IsExpanded="true">
+                <MudExpansionPanel Text="1. Assets" Expanded="true">
                     <MudFileUpload T="IBrowserFile" FilesChanged="OnBgUpload">
                         <ActivatorContent>
                             <MudButton HtmlTag="label"
@@ -57,7 +57,7 @@
                 </MudExpansionPanel>
 
                 <!-- Dialogue -->
-                <MudExpansionPanel Text="3. Dialogue" IsExpanded="true">
+                <MudExpansionPanel Text="3. Dialogue" Expanded="true">
                     <MudTextField @bind-Value="CharacterName" Label="Character Name" Variant="Variant.Outlined" />
                     <MudTextField @bind-Value="BodyText" Label="Message Body" Variant="Variant.Outlined" Lines="4" Class="mt-2" />
                     <MudSlider @bind-Value="CharSpeed" Min="50" Max="300" Step="10" Color="Color.Warning" Class="mt-4">Speed (ms/char)</MudSlider>
