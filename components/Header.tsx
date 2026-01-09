@@ -31,6 +31,9 @@ export default function Header() {
                     <Link href="/isekai-status-maker/index.html" className="text-cyan-400 hover:text-cyan-200 transition-colors font-bold flex items-center gap-1">
                         <span className="animate-pulse">✨</span>Status_Maker
                     </Link>
+                    <Link href="/isekai-status-maker/novel-promo" className="text-pink-400 hover:text-pink-200 transition-colors font-bold flex items-center gap-1">
+                        🎬Promo_Maker
+                    </Link>
                 </nav>
 
                 {/* Mobile Nav Toggle */}
@@ -48,6 +51,7 @@ export default function Header() {
                     <Link href="/rpg" className="p-2 hover:bg-white/5 rounded text-green-400 font-bold" onClick={() => setIsOpen(false)}>Idle Text RPG</Link>
                     <Link href="/game" className="p-2 hover:bg-white/5 rounded text-secondary font-bold" onClick={() => setIsOpen(false)}>Clicker Game</Link>
                     <Link href="/isekai-status-maker/index.html" className="p-2 hover:bg-white/5 rounded text-cyan-400 font-bold" onClick={() => setIsOpen(false)}>Status Maker</Link>
+                    <Link href="/isekai-status-maker/novel-promo" className="p-2 hover:bg-white/5 rounded text-pink-400 font-bold" onClick={() => setIsOpen(false)}>Novel Promo Maker</Link>
                 </div>
             )}
         </header>
