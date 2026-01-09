@@ -1,9 +1,4 @@
-﻿<MudThemeProvider Theme="@_theme" IsDarkMode="true" />
-
-
-
-
-
+﻿
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -16,20 +11,3 @@
         </LayoutView>
     </NotFound>
 </Router>
-
-@code {
-    private MudTheme _theme = new MudTheme()
-    {
-        PaletteDark = new PaletteDark()
-        {
-            Primary = "#00e5ff", // Cyan
-            Secondary = "#d500f9", // Neon Purple
-            Background = "#0f172a", // Dark Blue
-            Surface = "rgba(15, 23, 42, 0.6)", // Glassmorphism base
-            AppbarBackground = "#0f172a",
-            DrawerBackground = "#0f172a",
-            TextPrimary = "#ffffff",
-            TextSecondary = "rgba(255,255,255, 0.7)"
-        }
-    };
-}
