@@ -1,0 +1,225 @@
+@page "/novel-promo"
+@inject IJSRuntime JSRuntime
+@using System.IO
+
+<PageTitle>Novel Promo Maker</PageTitle>
+
+<MudGrid>
+    <!-- Preview Column -->
+    <MudItem xs="12" md="8">
+        <MudPaper Elevation="3" Class="pa-4 d-flex flex-column align-center justify-center bg-dark">
+            <canvas id="novelCanvas" width="854" height="480" style="width: 100%; max-width: 854px; height: auto; border: 1px solid #333;"></canvas>
+            
+            <MudSlider @bind-Value="Progress" Min="0" Max="100" Step="1" Color="Color.Secondary" Class="mt-4" ValueLabel="true">Progress: @Progress%</MudSlider>
+            
+            <div class="d-flex gap-4 mt-2">
+                <MudButton OnClick="Redraw" Variant="Variant.Outlined" Color="Color.Info">Redraw</MudButton>
+            </div>
+        </MudPaper>
+    </MudItem>
+
+    <!-- Controls Column -->
+    <MudItem xs="12" md="4">
+        <MudPaper Elevation="3" Class="pa-4">
+            <MudText Typo="Typo.h5" Class="mb-4 cyber-font">Control Panel</MudText>
+            
+            <MudExpansionPanels MultiExpansion="true">
+                <!-- Assets -->
+                <MudExpansionPanel Text="1. Assets" IsExpanded="true">
+                    <MudFileUpload T="IBrowserFile" FilesChanged="OnBgUpload">
+                        <ButtonTemplate>
+                            <MudButton HtmlTag="label"
+                                       Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       StartIcon="@Icons.Material.Filled.CloudUpload"
+                                       for="@context.Id">
+                                Upload Background
+                            </MudButton>
+                        </ButtonTemplate>
+                    </MudFileUpload>
+                    
+                    <MudFileUpload T="IBrowserFile" FilesChanged="OnCharUpload" Class="mt-2">
+                        <ButtonTemplate>
+                            <MudButton HtmlTag="label"
+                                       Variant="Variant.Filled"
+                                       Color="Color.Secondary"
+                                       StartIcon="@Icons.Material.Filled.Person"
+                                       for="@context.Id">
+                                Upload Character
+                            </MudButton>
+                        </ButtonTemplate>
+                    </MudFileUpload>
+                </MudExpansionPanel>
+
+                <!-- Character Settings -->
+                <MudExpansionPanel Text="2. Character">
+                     <MudSlider @bind-Value="CharX" Min="0" Max="854" Step="10" Color="Color.Info">X Position: @CharX</MudSlider>
+                     <MudSlider @bind-Value="CharScale" Min="0.1" Max="2.0" Step="0.1" Color="Color.Info">Scale: @CharScale</MudSlider>
+                     <MudSwitch @bind-Value="CharFlip" Color="Color.Secondary">Flip Horizontal</MudSwitch>
+                </MudExpansionPanel>
+
+                <!-- Dialogue -->
+                <MudExpansionPanel Text="3. Dialogue" IsExpanded="true">
+                    <MudTextField @bind-Value="CharacterName" Label="Character Name" Variant="Variant.Outlined" />
+                    <MudTextField @bind-Value="BodyText" Label="Message Body" Variant="Variant.Outlined" Lines="4" Class="mt-2" />
+                    <MudSlider @bind-Value="CharSpeed" Min="50" Max="300" Step="10" Color="Color.Warning" Class="mt-4">Speed (ms/char)</MudSlider>
+                </MudExpansionPanel>
+
+                <!-- Export -->
+                <MudExpansionPanel Text="4. Export">
+                    @if (isGenerating)
+                    {
+                        <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+                        <MudText>Generating GIF...</MudText>
+                    }
+                    else
+                    {
+                        <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick="GenerateGif" StartIcon="@Icons.Material.Filled.MovieCreation">
+                            Generate GIF
+                        </MudButton>
+                    }
+                </MudExpansionPanel>
+            </MudExpansionPanels>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<style>
+    .bg-dark { background-color: #0f172a; }
+    .cyber-font { font-family: 'Orbitron', sans-serif; }
+</style>
+
+@code {
+    private double _progress = 100;
+    public double Progress 
+    { 
+        get => _progress; 
+        set { _progress = value; Redraw(); } 
+    }
+
+    private double _charX = 427;
+    public double CharX 
+    { 
+        get => _charX; 
+        set { _charX = value; Redraw(); } 
+    }
+
+    private double _charScale = 1.0;
+    public double CharScale 
+    { 
+        get => _charScale; 
+        set { _charScale = value; Redraw(); } 
+    }
+
+    private bool _charFlip = false;
+    public bool CharFlip 
+    { 
+        get => _charFlip; 
+        set { _charFlip = value; Redraw(); } 
+    }
+
+    private string _characterName = "Name";
+    public string CharacterName 
+    { 
+        get => _characterName; 
+        set { _characterName = value; Redraw(); } 
+    }
+
+    private string _bodyText = "Welcome to the digital world.\nThis is a test message.";
+    public string BodyText 
+    { 
+        get => _bodyText; 
+        set { _bodyText = value; Redraw(); } 
+    }
+
+    public int CharSpeed { get; set; } = 100;
+
+    private bool isGenerating = false;
+    private bool isInitialized = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("novelPromo.init", "novelCanvas");
+            isInitialized = true;
+            await Redraw();
+        }
+    }
+
+    private async Task Redraw()
+    {
+        if (!isInitialized) return;
+
+        var state = new
+        {
+            charX = CharX,
+            charScale = CharScale,
+            charFlip = CharFlip,
+            name = CharacterName,
+            text = BodyText,
+            progress = Progress / 100.0
+        };
+
+        await JSRuntime.InvokeVoidAsync("novelPromo.drawFrame", state);
+    }
+
+    private async Task OnBgUpload(IBrowserFile file)
+    {
+        await UploadImage("bg", file);
+    }
+
+    private async Task OnCharUpload(IBrowserFile file)
+    {
+        await UploadImage("char", file);
+    }
+
+    private async Task UploadImage(string key, IBrowserFile file)
+    {
+        if (file.Size > 10 * 1024 * 1024) return; // Limit 10MB
+
+        using var stream = file.OpenReadStream(10 * 1024 * 1024);
+        using var ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        var base64 = Convert.ToBase64String(ms.ToArray());
+        var src = $"data:{file.ContentType};base64,{base64}";
+
+        await JSRuntime.InvokeVoidAsync("novelPromo.loadImage", key, src);
+        await Redraw();
+    }
+
+    private async Task GenerateGif()
+    {
+        isGenerating = true;
+        StateHasChanged();
+        await Task.Delay(100); // UI Refresh
+
+        var config = new
+        {
+            text = BodyText,
+            charSpeed = CharSpeed,
+            state = new 
+            {
+                charX = CharX, 
+                charScale = CharScale,
+                charFlip = CharFlip,
+                name = CharacterName,
+                text = BodyText
+            }
+        };
+
+        try 
+        {
+            await JSRuntime.InvokeVoidAsync("novelPromo.createGif", config /*, callback logic if needed but creating promise in JS */);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            isGenerating = false;
+            StateHasChanged();
+        }
+    }
+}
