@@ -24,9 +24,9 @@
         <MudPaper Elevation="3" Class="pa-4">
             <MudText Typo="Typo.h5" Class="mb-4 cyber-font">Control Panel</MudText>
             
-            <MudExpansionPanels MultiExpansion="true">
+            <MudExpansionPanels>
                 <!-- Assets -->
-                <MudExpansionPanel Text="1. Assets" Expanded="true">
+                <MudExpansionPanel Text="1. Assets">
                     <MudFileUpload T="IBrowserFile" FilesChanged="OnBgUpload">
                         <ActivatorContent>
                             <MudButton HtmlTag="label"
@@ -58,7 +58,7 @@
                 </MudExpansionPanel>
 
                 <!-- Dialogue -->
-                <MudExpansionPanel Text="3. Dialogue" Expanded="true">
+                <MudExpansionPanel Text="3. Dialogue">
                     <MudTextField @bind-Value="CharacterName" Label="Character Name" Variant="Variant.Outlined" />
                     <MudTextField @bind-Value="BodyText" Label="Message Body" Variant="Variant.Outlined" Lines="4" Class="mt-2" />
                     <MudSlider @bind-Value="CharSpeed" Min="50" Max="300" Step="10" Color="Color.Warning" Class="mt-4">Speed (ms/char)</MudSlider>
