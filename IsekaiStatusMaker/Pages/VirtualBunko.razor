@@ -46,20 +46,53 @@
                 </MudItem>
                 <MudItem xs="6">
                     <div style="margin-bottom: 8px;">
+                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Effect Preset</label>
+                        <select @bind="SelectedPresetId" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
+                            @foreach (var p in TitlePresets)
+                            {
+                                <option value="@p.Id">@p.Name</option>
+                            }
+                        </select>
+                    </div>
+                </MudItem>
+                <MudItem xs="6">
+                    <div style="margin-bottom: 8px;">
+                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Effect Preset</label>
+                        <select @bind="SelectedPresetId" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
+                            @foreach (var p in TitlePresets)
+                            {
+                                <option value="@p.Id">@p.Name</option>
+                            }
+                        </select>
+                    </div>
+                </MudItem>
+            </MudGrid>
+
+            <!-- 3D Mode Toggle -->
+             <div class="d-flex align-center justify-space-between mt-4 mb-2 pa-2 rounded" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                <MudText Typo="Typo.body2">3D Mockup Mode</MudText>
+                <MudSwitch @bind-Checked="Is3DMode" Color="Color.Secondary" Label="Preview" />
+            </div>
+
+            <MudGrid>
+                <MudItem xs="6">
+                    <div style="margin-bottom: 8px;">
                         <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Text Color</label>
                         <div style="display: flex; align-items: center; border: 1px solid #475569; border-radius: 4px; padding: 4px; background: #1e293b;">
                             <input type="color" @bind="TitleColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
                         </div>
                     </div>
                 </MudItem>
+                <MudItem xs="6">
+                     <div style="margin-bottom: 8px;">
+                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Outline Color</label>
+                        <div style="display: flex; align-items: center; border: 1px solid #475569; border-radius: 4px; padding: 4px; background: #1e293b;">
+                            <input type="color" @bind="TitleOutlineColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
+                        </div>
+                    </div>
+                </MudItem>
             </MudGrid>
-            <div style="margin-bottom: 8px;" class="mt-2">
-                <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Outline Color</label>
-                <div style="display: flex; align-items: center; border: 1px solid #475569; border-radius: 4px; padding: 4px; background: #1e293b;">
-                    <input type="color" @bind="TitleOutlineColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
-                </div>
-            </div>
-
+            
             <MudSlider @bind-Value="TitleSize" Min="1.0" Max="5.0" Step="0.1" Color="Color.Info" Class="mt-2">Size: @TitleSize rem</MudSlider>
             <MudSlider @bind-Value="TitleX" Min="0" Max="100" Step="1" Color="Color.Info">X: @TitleX %</MudSlider>
             <MudSlider @bind-Value="TitleY" Min="0" Max="100" Step="1" Color="Color.Info">Y: @TitleY %</MudSlider>
@@ -114,182 +147,70 @@
 
     <!-- Preview Column -->
     <MudItem xs="12" md="7" Class="d-flex justify-center align-start bg-dark pa-4" Style="min-height: 600px;">
-        <!-- Book Wrapper (for 3D effect) -->
-        <div class="book-wrapper">
-             <div class="book-cover" id="bunko-preview">
-                 <!-- Background Image -->
-                 @if (!string.IsNullOrEmpty(BgImageData))
-                 {
-                     <img src="@BgImageData" class="cover-image" />
-                 }
-                 else
-                 {
-                     <div class="cover-placeholder d-flex align-center justify-center">
-                         <MudIcon Icon="@Icons.Material.Filled.Image" Size="Size.Large" Color="Color.Dark" />
-                     </div>
-                 }
-
-                 <!-- Logo -->
-                 <div class="logo-area @GetLogoClass()">
-                     <div class="logo-text">@SelectedLabel</div>
-                 </div>
-
-                 <!-- Title -->
-                 <div class="title-area" style="@GetTitleStyle()">
-                     @TitleText
-                 </div>
-
-                 <!-- Author -->
-                  <div class="author-area">
-                     @AuthorName
-                 </div>
-
-                 <!-- Obi -->
-                 @if (ShowObi)
-                 {
-                     <div class="obi-area" style="background: @ObiColor;">
-                         <div class="obi-main">@ObiMainText</div>
-                         <div class="obi-sub">@ObiSubText</div>
-                     </div>
-                 }
-             </div>
-             <!-- Spine Effect -->
-             <div class="book-spine"></div>
+        <!-- Book Scene (3D) -->
+        <div class="book-scene">
+            <div class="@($"book {(Is3DMode ? "is-3d" : "")}")">
+                 <!-- SPINE -->
+                <div class="book-spine" style="@GetSpineStyle()"></div>
+                
+                <!-- PAGE EDGES -->
+                <div class="book-page-edges"></div>
+                
+                <!-- FRONT FACE -->
+                <div class="book-face-front">
+                    <!-- Original Wrapper (Target for Capture) -->
+                    <div class="book-wrapper" id="bunko-preview">
+                         <div class="book-cover">
+                             <!-- Background Image -->
+                             @if (!string.IsNullOrEmpty(BgImageData))
+                             {
+                                 <img src="@BgImageData" class="cover-image" />
+                             }
+                             else
+                             {
+                                 <div class="cover-placeholder d-flex align-center justify-center">
+                                     <MudIcon Icon="@Icons.Material.Filled.Image" Size="Size.Large" Color="Color.Dark" />
+                                 </div>
+                             }
+            
+                             <!-- Logo -->
+                             <div class="logo-area @GetLogoClass()">
+                                 <div class="logo-text">@SelectedLabel</div>
+                             </div>
+            
+                             <!-- Title -->
+                             <div class="title-area @GetTitleClass()" style="@GetTitleStyle()">
+                                 @TitleText
+                             </div>
+            
+                             <!-- Author -->
+                              <div class="author-area">
+                                 @AuthorName
+                             </div>
+            
+                             <!-- Obi -->
+                             @if (ShowObi)
+                             {
+                                 <div class="obi-area" style="background: @ObiColor;">
+                                     <div class="obi-main">@ObiMainText</div>
+                                     <div class="obi-sub">@ObiSubText</div>
+                                 </div>
+                             }
+                         </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </MudItem>
 </MudGrid>
 
+<link href="Pages/VirtualBunko.razor.css" rel="stylesheet" />
+
 <style>
+    /* Moved complex styles to VirtualBunko.razor.css */
+    /* Retaining only basic layout/color overrides if needed */
     .bg-dark { background-color: #0f172a; }
     .cyber-font { font-family: 'Orbitron', sans-serif; }
-
-    /* Book CSS */
-    .book-wrapper {
-        position: relative;
-        width: 350px; /* A6 Ratio Base: 105mm ~ 396px, scaled down */
-        height: 495px; /* 148mm ~ 559px */
-        perspective: 1000px;
-        filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.5));
-    }
-
-    .book-cover {
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        position: relative;
-        overflow: hidden;
-        border-radius: 2px 5px 5px 2px;
-        /* Make sure html2canvas captures this bg */
-        z-index: 1; 
-    }
-
-    .book-spine {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 10px;
-        height: 100%;
-        background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(0,0,0,0.2));
-        z-index: 10;
-        pointer-events: none;
-        border-radius: 2px 0 0 2px;
-    }
-
-    .cover-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 0;
-    }
-
-    .cover-placeholder {
-        width: 100%;
-        height: 100%;
-        background-color: #e2e8f0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 0;
-    }
-
-    .logo-area {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: rgba(0,0,0,0.7);
-        color: #fff;
-        padding: 4px 8px;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 0.8rem;
-        border: 1px solid #fff;
-        z-index: 5;
-    }
-    
-    .logo-area.genkai { border-color: #ff00de; color: #ff00de; }
-    .logo-area.sneaker { border-color: #00ffff; color: #00ffff; }
-    .logo-area.phantom { border-color: #a855f7; color: #a855f7; }
-
-    .title-area {
-        position: absolute;
-        writing-mode: vertical-rl;
-        text-orientation: upright;
-        top: 50px;
-        right: 40px; /* Base pos, adjustable */
-        font-weight: bold;
-        white-space: pre-wrap;
-        line-height: 1.2;
-        z-index: 4;
-        /* Shadow/Stroke Logic handled in inline style */
-    }
-
-    .author-area {
-        position: absolute;
-        bottom: 120px; /* Above Obi */
-        left: 20px;
-        color: #fff;
-        font-family: 'Noto Sans JP', sans-serif;
-        font-weight: bold;
-        text-shadow: 2px 2px 4px #000;
-        z-index: 4;
-    }
-
-    .obi-area {
-        position: absolute;
-        bottom: 15px;
-        left: 0;
-        width: 100%;
-        height: 25%;
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
-        z-index: 6; /* Above Title */
-        transform: skewY(-2deg); /* Stylish tilt */
-        transform-origin: bottom right;
-        width: 105%; /* Compensate skew */
-        left: -2.5%;
-    }
-
-    .obi-main {
-        font-size: 1.4rem;
-        font-weight: 900;
-        margin-bottom: 4px;
-        font-family: 'Noto Sans JP', sans-serif;
-        text-shadow: 2px 2px 0px #000;
-    }
-    
-    .obi-sub {
-        font-size: 0.9rem;
-        font-family: 'Noto Sans JP', sans-serif;
-        text-shadow: 1px 1px 2px #000;
-    }
-
 </style>
 
 @code {
@@ -299,7 +220,7 @@
     private string TitleColor = "#ffffff";
     private string TitleOutlineColor = "#000000";
     private double TitleSize = 2.5;
-    private double TitleX = 80; // Right aligned essentially
+    private double TitleX = 80; // Right aligned
     private double TitleY = 15;
     
     private string SelectedLabel = "GENKAI Bunko";
@@ -310,6 +231,27 @@
     private string ObiColor = "radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)";
     
     private string AuthorName = "著: 迷える子羊 / Illust: AI";
+
+    // 3D & Preset Logic
+    private bool Is3DMode = false;
+    private string SelectedPresetId = "standard";
+
+    public class TitlePreset
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string CssClass { get; set; }
+    }
+
+    private List<TitlePreset> TitlePresets = new List<TitlePreset>
+    {
+        new TitlePreset { Id = "standard", Name = "Standard (No Effect)", CssClass = "" },
+        new TitlePreset { Id = "neon", Name = "Demon Neon (Cyber)", CssClass = "tx-neon" },
+        new TitlePreset { Id = "gold", Name = "Isekai Gold (Luxury)", CssClass = "tx-gold" },
+        new TitlePreset { Id = "glitch", Name = "System Error (Glitch)", CssClass = "tx-glitch" },
+        new TitlePreset { Id = "romance", Name = "Sweet Romance (Soft)", CssClass = "tx-romance" },
+        new TitlePreset { Id = "impact", Name = "Shonen Impact (Bold)", CssClass = "tx-impact" }
+    };
 
     private void UseSnackbar(string msg)
     {
@@ -337,14 +279,50 @@
         };
     }
 
+    private string GetTitleClass()
+    {
+        var preset = TitlePresets.FirstOrDefault(p => p.Id == SelectedPresetId);
+        return $"{preset?.CssClass ?? ""}";
+    }
+
     private string GetTitleStyle()
     {
+        // Colors from picker are only used if preset doesn't override complexity, 
+        // but generally we keep them active so user can combine "Gold" with "Blue" color etc.
         var strokeStyle = $"-webkit-text-stroke: 1px {TitleOutlineColor}; text-shadow: 2px 2px 0 {TitleOutlineColor};";
+        
+        // If Preset is Neon/Gold, we might want to suppress the default text stroke or blending.
+        // For now, let's append.
         return $"font-family: '{SelectedFont}', serif; color: {TitleColor}; font-size: {TitleSize}rem; right: {100 - TitleX}%; top: {TitleY}%; {strokeStyle}";
+    }
+
+    private string GetSpineStyle()
+    {
+        // Heuristic: Use obi color for spine if it's solid, else grey
+         if (ObiColor.StartsWith("#")) return $"background: {ObiColor};";
+        return "background: #eee;";
     }
 
     private async Task ExportImage()
     {
-        await JSRuntime.InvokeVoidAsync("downloadCard", "bunko-preview", "virtual-bunko-cover.png");
+        bool was3D = Is3DMode;
+        if (was3D)
+        {
+            Is3DMode = false;
+            StateHasChanged();
+            await Task.Delay(150); // Wait for transition
+        }
+        
+        try {
+            await JSRuntime.InvokeVoidAsync("downloadCard", "bunko-preview", "virtual-bunko-cover.png");
+        }
+        finally
+        {
+            if (was3D)
+            {
+                Is3DMode = true;
+                StateHasChanged();
+            }
+        }
     }
 }

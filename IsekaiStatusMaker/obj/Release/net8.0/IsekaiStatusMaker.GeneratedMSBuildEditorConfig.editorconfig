@@ -38,10 +38,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTm92ZWxQcm9tby5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/honey/Documents/Antigravity/HP/IsekaiStatusMaker/Pages/VirtualBunko.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlydHVhbEJ1bmtvLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
 [c:/Users/honey/Documents/Antigravity/HP/IsekaiStatusMaker/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -61,3 +57,7 @@ build_metadata.AdditionalFiles.CssScope = b-jngezywa3z
 [c:/Users/honey/Documents/Antigravity/HP/IsekaiStatusMaker/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = b-42gjpmmvk7
+
+[c:/Users/honey/Documents/Antigravity/HP/IsekaiStatusMaker/Pages/VirtualBunko.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlydHVhbEJ1bmtvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-1bjfmkdmkf

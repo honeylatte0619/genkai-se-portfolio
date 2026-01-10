@@ -1,0 +1,152 @@
+/* 3D Scene Container */
+.book-scene {
+    width: 100%;
+    height: 600px;
+    /* Adjust based on your layout */
+    perspective: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Ensure it doesn't overflow during rotation */
+    overflow: visible;
+}
+
+/* The Book Object */
+.book {
+    position: relative;
+    width: 350px;
+    /* Match the approximate size of your cover, or use 100% of container if fixed */
+    height: 520px;
+    /* A6 Bunko Aspect Ratio approx 105:148 */
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy enter */
+    cursor: grab;
+}
+
+.book:active {
+    cursor: grabbing;
+}
+
+/* 3D Active State */
+.book.is-3d {
+    transform: rotateY(-35deg) rotateX(10deg);
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.book.is-3d:hover {
+    transform: rotateY(-25deg) rotateX(5deg) translateZ(20px);
+}
+
+/* Faces */
+.book-face-front,
+.book-face-back,
+.book-spine,
+.book-page-edges {
+    position: absolute;
+    backface-visibility: hidden;
+    /* Only show front face usually, but we want solidity */
+    /* Actually for a book we often want to see back layers if transparent, but here we are solid */
+    backface-visibility: visible;
+}
+
+/* Front Cover (The Editing Area) */
+.book-face-front {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transform: translateZ(15px);
+    /* Move forward by half thickness */
+    /* This matches standard thickness of 30px */
+}
+
+/* Spine (Left) */
+.book-spine {
+    width: 30px;
+    /* Thickness */
+    height: 100%;
+    background: #eee;
+    /* Default spine color, override inline */
+    transform: rotateY(-90deg) translateZ(15px);
+    /* Move left? No, rotate around center */
+    /* Geometry: Width 350. Center is 175.
+       Spine is at Left Edge (0).
+       TranslateX(-15px) RotateY(-90deg)
+    */
+    left: -15px;
+    top: 0;
+    /* Add shading */
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.2));
+}
+
+/* Page Edges (Right) */
+.book-page-edges {
+    width: 28px;
+    /* Slightly less than spine */
+    height: 98%;
+    /* Slightly less than cover */
+    top: 1%;
+    right: -14px;
+    background: #fff;
+    transform: rotateY(90deg);
+    background-image: repeating-linear-gradient(90deg,
+            #f0f0f0,
+            #f0f0f0 1px,
+            #e0e0e0 1px,
+            #e0e0e0 2px);
+    box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Back Cover (Optional, usually just a color) */
+.book-face-back {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    transform: rotateY(180deg) translateZ(15px);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+
+/* --- TEXT EFFECTS --- */
+
+/* Neon Cyber */
+.tx-neon {
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #ff00de,
+        0 0 30px #ff00de,
+        0 0 40px #ff00de;
+    /* Optional: override color if supported, but text-shadow is additive */
+}
+
+/* Isekai Gold */
+.tx-gold {
+    background: linear-gradient(to bottom, #cfc09f 22%, #634f2c 24%, #cfc09f 26%, #cfc09f 27%, #ffecb3 40%, #3a2c0f 78%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff;
+    /* Fallback */
+    filter: drop-shadow(2px 2px 0px #000);
+    /* Note: Text Stroke interacts weirdly with background-clip. */
+}
+
+/* Horror Glitch */
+.tx-glitch {
+    position: relative;
+    text-shadow: 2px 2px 0px red, -2px -2px 0px blue;
+}
+
+/* Romantic Pink */
+.tx-romance {
+    text-shadow:
+        2px 2px 0px #fff,
+        -2px -2px 0px #fff,
+        0 0 10px #ffb7c5;
+}
+
+/* Impact Outline */
+.tx-impact {
+    -webkit-text-stroke: 2px #000;
+    text-shadow: 4px 4px 0px #fff;
+}
