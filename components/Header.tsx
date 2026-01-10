@@ -29,16 +29,7 @@ export default function Header() {
                         Game_Start()
                     </Link>
                     <a href="/isekai-status-maker/index.html" className="text-cyan-400 hover:text-cyan-200 transition-colors font-bold flex items-center gap-1">
-                        <span className="animate-pulse">✨</span>Status_Maker
-                    </a>
-                    <a href="/isekai-status-maker/novel-promo" className="text-pink-400 hover:text-pink-200 transition-colors font-bold flex items-center gap-1">
-                        🎬Promo_Maker
-                    </a>
-                    <a href="/isekai-status-maker/virtual-bunko" className="text-sm font-medium hover:text-cyan-400 transition-colors">
-                        Virtual Bunko
-                    </a>
-                    <a href="/isekai-status-maker/magic-circle" className="text-sm font-medium hover:text-cyan-400 transition-colors">
-                        Magic Circle
+                        <span className="animate-pulse">✨</span>Isekai Status Maker
                     </a>
                 </nav>
 
@@ -56,9 +47,7 @@ export default function Header() {
                     <Link href="/merge" className="p-2 hover:bg-white/5 rounded text-accent font-bold" onClick={() => setIsOpen(false)}>Puzzle Game</Link>
                     <Link href="/rpg" className="p-2 hover:bg-white/5 rounded text-green-400 font-bold" onClick={() => setIsOpen(false)}>Idle Text RPG</Link>
                     <Link href="/game" className="p-2 hover:bg-white/5 rounded text-secondary font-bold" onClick={() => setIsOpen(false)}>Clicker Game</Link>
-                    <a href="/isekai-status-maker/index.html" className="p-2 hover:bg-white/5 rounded text-cyan-400 font-bold" onClick={() => setIsOpen(false)}>Status Maker</a>
-                    <a href="/isekai-status-maker/novel-promo" className="p-2 hover:bg-white/5 rounded text-pink-400 font-bold" onClick={() => setIsOpen(false)}>Novel Promo Maker</a>
-                    <a href="/isekai-status-maker/virtual-bunko" className="p-2 hover:bg-white/5 rounded text-purple-400 font-bold" onClick={() => setIsOpen(false)}>Virtual Bunko Press</a>
+                    <a href="/isekai-status-maker/index.html" className="p-2 hover:bg-white/5 rounded text-cyan-400 font-bold" onClick={() => setIsOpen(false)}>Isekai Status Maker</a>
                 </div>
             )}
         </header>
