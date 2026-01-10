@@ -2,12 +2,10 @@
 .book-scene[b-1bjfmkdmkf] {
     width: 100%;
     height: 600px;
-    /* Adjust based on your layout */
     perspective: 1500px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Ensure it doesn't overflow during rotation */
     overflow: visible;
 }
 
@@ -15,12 +13,9 @@
 .book[b-1bjfmkdmkf] {
     position: relative;
     width: 350px;
-    /* Match the approximate size of your cover, or use 100% of container if fixed */
     height: 520px;
-    /* A6 Bunko Aspect Ratio approx 105:148 */
     transform-style: preserve-3d;
     transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* Bouncy enter */
     cursor: grab;
 }
 
@@ -44,9 +39,6 @@
 .book-spine[b-1bjfmkdmkf],
 .book-page-edges[b-1bjfmkdmkf] {
     position: absolute;
-    backface-visibility: hidden;
-    /* Only show front face usually, but we want solidity */
-    /* Actually for a book we often want to see back layers if transparent, but here we are solid */
     backface-visibility: visible;
 }
 
@@ -56,35 +48,146 @@
     height: 100%;
     z-index: 2;
     transform: translateZ(15px);
-    /* Move forward by half thickness */
-    /* This matches standard thickness of 30px */
+}
+
+/* Inner Content Styles (Restored) */
+.book-wrapper[b-1bjfmkdmkf] {
+    /* Optional wrapper inside face */
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.book-cover[b-1bjfmkdmkf] {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    /* Ensure image creates cover */
+}
+
+.cover-image[b-1bjfmkdmkf] {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.cover-placeholder[b-1bjfmkdmkf] {
+    width: 100%;
+    height: 100%;
+    background-color: #e2e8f0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.logo-area[b-1bjfmkdmkf] {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 4px 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    border: 1px solid #fff;
+    z-index: 5;
+}
+
+.logo-area.genkai[b-1bjfmkdmkf] {
+    border-color: #ff00de;
+    color: #ff00de;
+}
+
+.logo-area.sneaker[b-1bjfmkdmkf] {
+    border-color: #00ffff;
+    color: #00ffff;
+}
+
+.logo-area.phantom[b-1bjfmkdmkf] {
+    border-color: #a855f7;
+    color: #a855f7;
+}
+
+.title-area[b-1bjfmkdmkf] {
+    position: absolute;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    top: 50px;
+    right: 40px;
+    font-weight: bold;
+    white-space: pre-wrap;
+    line-height: 1.2;
+    z-index: 4;
+}
+
+.author-area[b-1bjfmkdmkf] {
+    position: absolute;
+    bottom: 120px;
+    left: 20px;
+    color: #fff;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #000;
+    z-index: 4;
+}
+
+.obi-area[b-1bjfmkdmkf] {
+    position: absolute;
+    bottom: 0;
+    /* Fixed: Was 15px */
+    left: 0;
+    width: 100%;
+    height: 25%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 6;
+    transform: skewY(-2deg);
+    transform-origin: bottom right;
+    width: 105%;
+    left: -2.5%;
+}
+
+.obi-main[b-1bjfmkdmkf] {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-shadow: 2px 2px 0px #000;
+}
+
+.obi-sub[b-1bjfmkdmkf] {
+    font-size: 0.9rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    text-shadow: 1px 1px 2px #000;
 }
 
 /* Spine (Left) */
 .book-spine[b-1bjfmkdmkf] {
     width: 30px;
-    /* Thickness */
     height: 100%;
     background: #eee;
-    /* Default spine color, override inline */
     transform: rotateY(-90deg) translateZ(15px);
-    /* Move left? No, rotate around center */
-    /* Geometry: Width 350. Center is 175.
-       Spine is at Left Edge (0).
-       TranslateX(-15px) RotateY(-90deg)
-    */
     left: -15px;
     top: 0;
-    /* Add shading */
     background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.2));
 }
 
 /* Page Edges (Right) */
 .book-page-edges[b-1bjfmkdmkf] {
     width: 28px;
-    /* Slightly less than spine */
     height: 98%;
-    /* Slightly less than cover */
     top: 1%;
     right: -14px;
     background: #fff;
@@ -97,7 +200,7 @@
     box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Back Cover (Optional, usually just a color) */
+/* Back Cover */
 .book-face-back[b-1bjfmkdmkf] {
     width: 100%;
     height: 100%;
@@ -117,18 +220,16 @@
         0 0 20px #ff00de,
         0 0 30px #ff00de,
         0 0 40px #ff00de;
-    /* Optional: override color if supported, but text-shadow is additive */
 }
 
 /* Isekai Gold */
 .tx-gold[b-1bjfmkdmkf] {
     background: linear-gradient(to bottom, #cfc09f 22%, #634f2c 24%, #cfc09f 26%, #cfc09f 27%, #ffecb3 40%, #3a2c0f 78%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     color: #fff;
-    /* Fallback */
     filter: drop-shadow(2px 2px 0px #000);
-    /* Note: Text Stroke interacts weirdly with background-clip. */
 }
 
 /* Horror Glitch */
