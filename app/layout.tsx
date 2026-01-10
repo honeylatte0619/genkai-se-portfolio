@@ -10,6 +10,9 @@ const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] });
 export const metadata: Metadata = {
     title: "限界SEアラサー女子の日常 - 公式ポートフォリオ",
     description: "バグとラテに支配された日常を描く、エンジニア共感必至の漫画サイト。",
+    icons: {
+        icon: '/icon.png',
+    },
 };
 
 export default function RootLayout({
