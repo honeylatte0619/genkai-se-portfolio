@@ -1,7 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/isekai-status-maker/((?!.*\\.).*)",
+            "source": "/isekai-status-maker/:path(novel-promo|virtual-bunko)",
             "destination": "/isekai-status-maker/index.html"
         }
     ]
