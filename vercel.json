@@ -1,7 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/isekai-status-maker/:path*",
+            "source": "/isekai-status-maker/((?!.*\\.).*)",
             "destination": "/isekai-status-maker/index.html"
         }
     ]
