@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LeGNFEiYpuW2cuwpmWAk2UJH1EwHHSY8jx6IJBbO/Ts=",
+  "Hash": "VV/N+cMJ0XPkB3kyKa2tyN2oSQAOLYRbuOowaAK0Hi4=",
   "Source": "IsekaiStatusMaker",
   "BasePath": "/",
   "Mode": "Root",
@@ -3171,6 +3171,25 @@
       "OriginalItemSpec": "wwwroot\\icon-192.png"
     },
     {
+      "Identity": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\icon-512.png",
+      "SourceId": "IsekaiStatusMaker",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "icon-512.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\icon-512.png"
+    },
+    {
       "Identity": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\index.html",
       "SourceId": "IsekaiStatusMaker",
       "SourceType": "Discovered",
@@ -3226,6 +3245,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\novelPromo.js"
+    },
+    {
+      "Identity": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\manifest.webmanifest",
+      "SourceId": "IsekaiStatusMaker",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "manifest.webmanifest",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\manifest.webmanifest"
     },
     {
       "Identity": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\sample-data\\weather.json",

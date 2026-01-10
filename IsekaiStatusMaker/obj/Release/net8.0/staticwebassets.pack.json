@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\icon-192.png"
     },
     {
+      "Id": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\icon-512.png",
+      "PackagePath": "staticwebassets\\icon-512.png"
+    },
+    {
       "Id": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
@@ -43,6 +47,10 @@
     {
       "Id": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\novelPromo.js",
       "PackagePath": "staticwebassets\\js\\novelPromo.js"
+    },
+    {
+      "Id": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\manifest.webmanifest",
+      "PackagePath": "staticwebassets\\manifest.webmanifest"
     },
     {
       "Id": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\sample-data\\weather.json",
