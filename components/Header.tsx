@@ -28,15 +28,15 @@ export default function Header() {
                     <Link href="/game" className="text-secondary hover:text-accent transition-colors font-bold">
                         Game_Start()
                     </Link>
-                    <Link href="/isekai-status-maker/index.html" className="text-cyan-400 hover:text-cyan-200 transition-colors font-bold flex items-center gap-1">
+                    <a href="/isekai-status-maker/index.html" className="text-cyan-400 hover:text-cyan-200 transition-colors font-bold flex items-center gap-1">
                         <span className="animate-pulse">✨</span>Status_Maker
-                    </Link>
-                    <Link href="/isekai-status-maker/novel-promo" className="text-pink-400 hover:text-pink-200 transition-colors font-bold flex items-center gap-1">
+                    </a>
+                    <a href="/isekai-status-maker/novel-promo" className="text-pink-400 hover:text-pink-200 transition-colors font-bold flex items-center gap-1">
                         🎬Promo_Maker
-                    </Link>
-                    <Link href="/isekai-status-maker/virtual-bunko" className="text-purple-400 hover:text-purple-200 transition-colors font-bold flex items-center gap-1">
+                    </a>
+                    <a href="/isekai-status-maker/virtual-bunko" className="text-purple-400 hover:text-purple-200 transition-colors font-bold flex items-center gap-1">
                         📚Virtual_Bunko
-                    </Link>
+                    </a>
                 </nav>
 
                 {/* Mobile Nav Toggle */}
@@ -53,9 +53,9 @@ export default function Header() {
                     <Link href="/merge" className="p-2 hover:bg-white/5 rounded text-accent font-bold" onClick={() => setIsOpen(false)}>Puzzle Game</Link>
                     <Link href="/rpg" className="p-2 hover:bg-white/5 rounded text-green-400 font-bold" onClick={() => setIsOpen(false)}>Idle Text RPG</Link>
                     <Link href="/game" className="p-2 hover:bg-white/5 rounded text-secondary font-bold" onClick={() => setIsOpen(false)}>Clicker Game</Link>
-                    <Link href="/isekai-status-maker/index.html" className="p-2 hover:bg-white/5 rounded text-cyan-400 font-bold" onClick={() => setIsOpen(false)}>Status Maker</Link>
-                    <Link href="/isekai-status-maker/novel-promo" className="p-2 hover:bg-white/5 rounded text-pink-400 font-bold" onClick={() => setIsOpen(false)}>Novel Promo Maker</Link>
-                    <Link href="/isekai-status-maker/virtual-bunko" className="p-2 hover:bg-white/5 rounded text-purple-400 font-bold" onClick={() => setIsOpen(false)}>Virtual Bunko Press</Link>
+                    <a href="/isekai-status-maker/index.html" className="p-2 hover:bg-white/5 rounded text-cyan-400 font-bold" onClick={() => setIsOpen(false)}>Status Maker</a>
+                    <a href="/isekai-status-maker/novel-promo" className="p-2 hover:bg-white/5 rounded text-pink-400 font-bold" onClick={() => setIsOpen(false)}>Novel Promo Maker</a>
+                    <a href="/isekai-status-maker/virtual-bunko" className="p-2 hover:bg-white/5 rounded text-purple-400 font-bold" onClick={() => setIsOpen(false)}>Virtual Bunko Press</a>
                 </div>
             )}
         </header>

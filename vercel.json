@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/isekai-status-maker/:path*",
+            "destination": "/isekai-status-maker/index.html"
+        }
+    ]
+}
