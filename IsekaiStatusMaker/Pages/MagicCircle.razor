@@ -1,0 +1,173 @@
+@page "/magic-circle"
+@inject IJSRuntime JSRuntime
+@inject ISnackbar Snackbar
+@using System.IO
+
+<PageTitle>Cyber Magic Circle Generator</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-4 cyber-font" Color="Color.Primary">Cyber Magic Circle Generator</MudText>
+
+<MudGrid>
+    <!-- Left Column: Controls -->
+    <MudItem xs="12" md="4">
+        <MudPaper Elevation="3" Class="pa-4">
+            <MudText Typo="Typo.h6" Class="mb-4">Grimoire Settings</MudText>
+
+            <!-- 1. Assets -->
+            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="mt-2">1. Summon Object</MudText>
+            <MudFileUpload T="IBrowserFile" FilesChanged="OnImageUpload" Accept=".png, .jpg, .jpeg">
+                <ButtonTemplate>
+                    <MudButton HtmlTag="label"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               StartIcon="@Icons.Material.Filled.CloudUpload"
+                               FullWidth="true"
+                               for="@context">
+                        Upload Image
+                    </MudButton>
+                </ButtonTemplate>
+            </MudFileUpload>
+
+            <MudDivider Class="my-4" />
+
+            <!-- 2. Magic Parameters -->
+            <MudText Typo="Typo.subtitle2" Color="Color.Info" Class="mt-2">2. Magic Parameters</MudText>
+            
+            <div class="mb-3">
+                <label style="font-size: 0.8rem; color: #94a3b8;">Magic Color</label>
+                <select @bind="MagicColor" @bind:after="UpdateParams" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
+                    <option value="#00e5ff">Cyber Cyan</option>
+                    <option value="#ffd700">Legendary Gold</option>
+                    <option value="#ff0055">Crimson Red</option>
+                    <option value="#bd00ff">Abyss Purple</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label style="font-size: 0.8rem; color: #94a3b8;">Rune Mode</label>
+                <select @bind="TextMode" @bind:after="UpdateParams" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
+                    <option value="rune">Ancient Runes</option>
+                    <option value="code">Source Code (C#/Linux)</option>
+                    <option value="hex">Hex Dump (0xDEADBEEF)</option>
+                </select>
+            </div>
+
+            <MudSlider @bind-Value="SpinSpeed" Min="0.1" Max="3.0" Step="0.1" Color="Color.Info" ValueLabel="true" Immediate="true" @oninput="UpdateParams">Spin Speed</MudSlider>
+            <MudSlider @bind-Value="ParticleAmount" Min="0" Max="100" Step="5" Color="Color.Success" ValueLabel="true" Immediate="true" @oninput="UpdateParams">Mana Density</MudSlider>
+
+            <MudDivider Class="my-4" />
+
+            <!-- 3. Export -->
+            <MudText Typo="Typo.subtitle2" Color="Color.Warning" Class="mt-2">3. Ritual Record</MudText>
+            
+            @if (isGenerating)
+            {
+                <div class="d-flex flex-column align-center justify-center pa-4" style="background: rgba(0,0,0,0.2); border-radius: 8px;">
+                     <MudProgressCircular Color="Color.Secondary" Indeterminate="true" Size="Size.Medium" />
+                     <MudText Class="mt-2 cyber-font blink">CHANTING... (Processing)</MudText>
+                </div>
+            }
+            else
+            {
+                <MudButton Variant="Variant.Filled" Color="Color.Warning" FullWidth="true" OnClick="GenerateGif" StartIcon="@Icons.Material.Filled.MovieCreation" Class="py-3">
+                    Summon Ritual Record (GIF)
+                </MudButton>
+            }
+
+        </MudPaper>
+    </MudItem>
+
+    <!-- Right Column: Preview -->
+    <MudItem xs="12" md="8">
+        <MudPaper Elevation="3" Class="pa-4 d-flex align-center justify-center bg-dark" Style="min-height: 500px; position: relative;">
+            <canvas id="magicCanvas" width="600" height="600" style="width: 100%; max-width: 600px; height: auto; border: 1px solid #333; box-shadow: 0 0 20px rgba(0,0,0,0.5);"></canvas>
+            
+            <!-- Loading Overlay for Canvas Init -->
+             @if (!isInitialized)
+            {
+                <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 10;">
+                    <MudText>Initializing Magic System...</MudText>
+                </div>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+<style>
+    .bg-dark { background-color: #0f172a; background-image: radial-gradient(#1e293b 1px, transparent 1px); background-size: 20px 20px; }
+    .cyber-font { font-family: 'Orbitron', sans-serif; }
+    .blink { animation: blinker 1.5s linear infinite; }
+    @@keyframes blinker { 50% { opacity: 0; } }
+</style>
+
+@code {
+    private string MagicColor = "#00e5ff";
+    private string TextMode = "rune";
+    private double SpinSpeed = 1.0;
+    private int ParticleAmount = 50;
+    
+    private bool isInitialized = false;
+    private bool isGenerating = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("magicCircle.init", "magicCanvas");
+            isInitialized = true;
+            StateHasChanged();
+            
+            // Initial Param Push
+            await UpdateParams();
+        }
+    }
+
+    private async Task UpdateParams()
+    {
+        if (!isInitialized) return;
+        
+        var config = new {
+            color = MagicColor,
+            textMode = TextMode,
+            speed = SpinSpeed,
+            particleCount = ParticleAmount
+        };
+        
+        await JSRuntime.InvokeVoidAsync("magicCircle.updateParams", config);
+    }
+
+    private async Task OnImageUpload(IBrowserFile file)
+    {
+        if (file.Size > 10 * 1024 * 1024) return;
+
+        using var stream = file.OpenReadStream(10 * 1024 * 1024);
+        using var ms = new MemoryStream();
+        await stream.CopyToAsync(ms);
+        var base64 = Convert.ToBase64String(ms.ToArray());
+        var src = $"data:{file.ContentType};base64,{base64}";
+
+        await JSRuntime.InvokeVoidAsync("magicCircle.loadImage", src);
+    }
+
+    private async Task GenerateGif()
+    {
+        isGenerating = true;
+        StateHasChanged();
+        await Task.Delay(100); // Wait for UI
+
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("magicCircle.createGif");
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Ritual Failed: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            isGenerating = false;
+            StateHasChanged();
+            Snackbar.Add("Ritual Complete. The grimoire has been updated.", Severity.Success);
+        }
+    }
+}

@@ -45,6 +45,10 @@
       "PackagePath": "staticwebassets\\js\\gif.worker.js"
     },
     {
+      "Id": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\magicCircle.js",
+      "PackagePath": "staticwebassets\\js\\magicCircle.js"
+    },
+    {
       "Id": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\novelPromo.js",
       "PackagePath": "staticwebassets\\js\\novelPromo.js"
     },

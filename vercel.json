@@ -1,7 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/isekai-status-maker/:path(novel-promo|virtual-bunko)",
+            "source": "/isekai-status-maker/:path(novel-promo|virtual-bunko|magic-circle)",
             "destination": "/isekai-status-maker/index.html"
         }
     ]

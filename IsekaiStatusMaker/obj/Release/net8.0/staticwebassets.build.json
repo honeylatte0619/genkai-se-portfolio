@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4aeOVml+B7fjeW9Xj68nZCU87a6WTfBZx8++wil7WSs=",
+  "Hash": "r2n83lP32ATsrPjB3WTv5BTLYjTc1BgWIqSAxtOjDtc=",
   "Source": "IsekaiStatusMaker",
   "BasePath": "/",
   "Mode": "Root",
@@ -8109,6 +8109,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\gif.worker.js"
+    },
+    {
+      "Identity": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\magicCircle.js",
+      "SourceId": "IsekaiStatusMaker",
+      "SourceType": "Discovered",
+      "ContentRoot": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "js/magicCircle.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\magicCircle.js"
     },
     {
       "Identity": "c:\\Users\\honey\\Documents\\Antigravity\\HP\\IsekaiStatusMaker\\wwwroot\\js\\novelPromo.js",

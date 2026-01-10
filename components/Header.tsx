@@ -34,8 +34,11 @@ export default function Header() {
                     <a href="/isekai-status-maker/novel-promo" className="text-pink-400 hover:text-pink-200 transition-colors font-bold flex items-center gap-1">
                         🎬Promo_Maker
                     </a>
-                    <a href="/isekai-status-maker/virtual-bunko" className="text-purple-400 hover:text-purple-200 transition-colors font-bold flex items-center gap-1">
-                        📚Virtual_Bunko
+                    <a href="/isekai-status-maker/virtual-bunko" className="text-sm font-medium hover:text-cyan-400 transition-colors">
+                        Virtual Bunko
+                    </a>
+                    <a href="/isekai-status-maker/magic-circle" className="text-sm font-medium hover:text-cyan-400 transition-colors">
+                        Magic Circle
                     </a>
                 </nav>
 
