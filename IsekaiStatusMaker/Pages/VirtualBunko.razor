@@ -5,7 +5,7 @@
 
 <PageTitle>Virtual Bunko Press</PageTitle>
 
-<MudText Typo="Typo.h4" Class="mb-4 cyber-font" Color="Color.Primary">Virtual Bunko Press</MudText>
+<MudText Typo="Typo.h4" Class="mb-4 cyber-font" Color="Color.Primary">Virtual Bunko Press (vNative-Raw)</MudText>
 
 <MudGrid>
     <!-- Editor Column -->
@@ -36,39 +36,27 @@
             
             <MudGrid Class="mt-2">
                 <MudItem xs="6">
-                    <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1">
-                        <div class="mud-input-control-input-container">
-                            <div class="mud-input mud-input-outlined mud-shrink">
-                                <select @bind="SelectedFont" class="mud-input-slot mud-input-root mud-input-root-outlined" style="appearance: auto; padding-right: 8px;">
-                                    <option value="Shippori Mincho">Mincho (Fantasy)</option>
-                                    <option value="Mochiy Pop One">Pop (LoveCom)</option>
-                                </select>
-                                <div class="mud-input-slot mud-input-root mud-input-root-outlined" style="display:none"></div>
-                                <div class="mud-input-outlined-border"></div>
-                            </div>
-                            <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Font</label>
-                        </div>
+                    <div style="margin-bottom: 8px;">
+                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Font</label>
+                        <select @bind="SelectedFont" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
+                             <option value="Shippori Mincho">Mincho (Fantasy)</option>
+                             <option value="Mochiy Pop One">Pop (LoveCom)</option>
+                        </select>
                     </div>
                 </MudItem>
                 <MudItem xs="6">
-                    <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1">
-                        <div class="mud-input-control-input-container">
-                            <div class="mud-input mud-input-outlined mud-shrink" style="display: flex; align-items: center; padding: 4px 14px;">
-                                <input type="color" @bind="TitleColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
-                                <div class="mud-input-outlined-border"></div>
-                            </div>
-                            <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Text Color</label>
+                    <div style="margin-bottom: 8px;">
+                        <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Text Color</label>
+                        <div style="display: flex; align-items: center; border: 1px solid #475569; border-radius: 4px; padding: 4px; background: #1e293b;">
+                            <input type="color" @bind="TitleColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
                         </div>
                     </div>
                 </MudItem>
             </MudGrid>
-            <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1 mt-2">
-                <div class="mud-input-control-input-container">
-                    <div class="mud-input mud-input-outlined mud-shrink" style="display: flex; align-items: center; padding: 4px 14px;">
-                        <input type="color" @bind="TitleOutlineColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
-                        <div class="mud-input-outlined-border"></div>
-                    </div>
-                    <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Outline Color</label>
+            <div style="margin-bottom: 8px;" class="mt-2">
+                <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Outline Color</label>
+                <div style="display: flex; align-items: center; border: 1px solid #475569; border-radius: 4px; padding: 4px; background: #1e293b;">
+                    <input type="color" @bind="TitleOutlineColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
                 </div>
             </div>
 
@@ -80,19 +68,13 @@
 
             <!-- 3. Logo Settings -->
             <MudText Typo="Typo.subtitle2" Color="Color.Secondary" Class="mt-4">3. Bunko Label</MudText>
-            <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1">
-                <div class="mud-input-control-input-container">
-                    <div class="mud-input mud-input-outlined mud-shrink">
-                        <select @bind="SelectedLabel" class="mud-input-slot mud-input-root mud-input-root-outlined" style="appearance: auto; padding-right: 8px;">
-                             <option Value="GENKAI Bunko">GENKAI Bunko (限界文庫)</option>
-                             <option Value="CYBER Sneaker">CYBER Sneaker (電脳スニーカー)</option>
-                             <option Value="Phantom Novel">Phantom Novel (幻影ノベル)</option>
-                        </select>
-                        <div class="mud-input-slot mud-input-root mud-input-root-outlined" style="display:none"></div>
-                        <div class="mud-input-outlined-border"></div>
-                    </div>
-                    <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Label</label>
-                </div>
+            <div style="margin-bottom: 8px;">
+                 <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Label</label>
+                 <select @bind="SelectedLabel" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
+                      <option Value="GENKAI Bunko">GENKAI Bunko (限界文庫)</option>
+                      <option Value="CYBER Sneaker">CYBER Sneaker (電脳スニーカー)</option>
+                      <option Value="Phantom Novel">Phantom Novel (幻影ノベル)</option>
+                 </select>
             </div>
 
             <MudDivider Class="my-4" />
@@ -105,21 +87,15 @@
             {
                 <MudTextField @bind-Value="ObiMainText" Label="Catchphrase (Main)" Variant="Variant.Outlined" Class="mt-2" />
                 <MudTextField @bind-Value="ObiSubText" Label="Sub Text" Variant="Variant.Outlined" Class="mt-2" />
-                <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1 mt-2">
-                    <div class="mud-input-control-input-container">
-                        <div class="mud-input mud-input-outlined mud-shrink">
-                            <select @bind="ObiColor" class="mud-input-slot mud-input-root mud-input-root-outlined" style="appearance: auto; padding-right: 8px;">
-                                <option Value="radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)">Pastel Gradient</option>
-                                <option Value="#ef4444">Burning Red</option>
-                                <option Value="#eab308">Lightning Yellow</option>
-                                <option Value="#3b82f6">Cyber Blue</option>
-                                <option Value="#000000">Abyss Black</option>
-                            </select>
-                            <div class="mud-input-slot mud-input-root mud-input-root-outlined" style="display:none"></div>
-                            <div class="mud-input-outlined-border"></div>
-                        </div>
-                        <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Color</label>
-                    </div>
+                <div style="margin-bottom: 8px;" class="mt-2">
+                    <label style="font-size: 0.8rem; color: #94a3b8; display: block; margin-bottom: 4px;">Color</label>
+                    <select @bind="ObiColor" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #475569; background: #1e293b; color: white;">
+                        <option Value="radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)">Pastel Gradient</option>
+                        <option Value="#ef4444">Burning Red</option>
+                        <option Value="#eab308">Lightning Yellow</option>
+                        <option Value="#3b82f6">Cyber Blue</option>
+                        <option Value="#000000">Abyss Black</option>
+                    </select>
                 </div>
             }
              <MudDivider Class="my-4" />
