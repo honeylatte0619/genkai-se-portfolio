@@ -5,16 +5,13 @@
 
 <PageTitle>Virtual Bunko Press</PageTitle>
 
-<MudText Typo="Typo.h4" Class="mb-4 cyber-font" Color="Color.Primary">Virtual Bunko Press (DEBUG MODE v6.19.1 - RELOADED)</MudText>
+<MudText Typo="Typo.h4" Class="mb-4 cyber-font" Color="Color.Primary">Virtual Bunko Press</MudText>
 
 <MudGrid>
     <!-- Editor Column -->
     <MudItem xs="12" md="5">
         <MudPaper Elevation="3" Class="pa-4">
             <MudText Typo="Typo.h6" Class="mb-4">Editor</MudText>
-
-            <button onclick="alert('HTML Click')" style="padding: 10px; background: red; color: white; margin-bottom: 10px;">HTML TEST</button>
-            <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(() => UseSnackbar("Blazor Click Works"))">Blazor TEST</MudButton>
 
             <!-- 1. Background Image -->
             <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="mt-4">1. Cover Illustration</MudText>
@@ -39,16 +36,41 @@
             
             <MudGrid Class="mt-2">
                 <MudItem xs="6">
-                    <MudSelect T="string" Label="Font" @bind-Value="SelectedFont" Variant="Variant.Outlined" Dense="true">
-                        <MudSelectItem Value="@("Shippori Mincho")">Mincho (Fantasy)</MudSelectItem>
-                        <MudSelectItem Value="@("Mochiy Pop One")">Pop (LoveCom)</MudSelectItem>
-                    </MudSelect>
+                    <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1">
+                        <div class="mud-input-control-input-container">
+                            <div class="mud-input mud-input-outlined mud-shrink">
+                                <select @bind="SelectedFont" class="mud-input-slot mud-input-root mud-input-root-outlined" style="appearance: auto; padding-right: 8px;">
+                                    <option value="Shippori Mincho">Mincho (Fantasy)</option>
+                                    <option value="Mochiy Pop One">Pop (LoveCom)</option>
+                                </select>
+                                <div class="mud-input-slot mud-input-root mud-input-root-outlined" style="display:none"></div>
+                                <div class="mud-input-outlined-border"></div>
+                            </div>
+                            <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Font</label>
+                        </div>
+                    </div>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudColorPicker Label="Text Color" @bind-Text="TitleColor" Style="@($"color: {TitleColor};")" Placeholder="Select Color" />
+                    <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1">
+                        <div class="mud-input-control-input-container">
+                            <div class="mud-input mud-input-outlined mud-shrink" style="display: flex; align-items: center; padding: 4px 14px;">
+                                <input type="color" @bind="TitleColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
+                                <div class="mud-input-outlined-border"></div>
+                            </div>
+                            <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Text Color</label>
+                        </div>
+                    </div>
                 </MudItem>
             </MudGrid>
-            <MudColorPicker Label="Outline Color" @bind-Text="TitleOutlineColor" Style="@($"color: {TitleOutlineColor};")" Class="mt-2" />
+            <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1 mt-2">
+                <div class="mud-input-control-input-container">
+                    <div class="mud-input mud-input-outlined mud-shrink" style="display: flex; align-items: center; padding: 4px 14px;">
+                        <input type="color" @bind="TitleOutlineColor" style="width: 100%; height: 30px; border: none; background: transparent; cursor: pointer;" />
+                        <div class="mud-input-outlined-border"></div>
+                    </div>
+                    <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Outline Color</label>
+                </div>
+            </div>
 
             <MudSlider @bind-Value="TitleSize" Min="1.0" Max="5.0" Step="0.1" Color="Color.Info" Class="mt-2">Size: @TitleSize rem</MudSlider>
             <MudSlider @bind-Value="TitleX" Min="0" Max="100" Step="1" Color="Color.Info">X: @TitleX %</MudSlider>
@@ -58,11 +80,20 @@
 
             <!-- 3. Logo Settings -->
             <MudText Typo="Typo.subtitle2" Color="Color.Secondary" Class="mt-4">3. Bunko Label</MudText>
-            <MudSelect T="string" Label="Label" @bind-Value="SelectedLabel" Variant="Variant.Outlined" Dense="true">
-                <MudSelectItem Value="@("GENKAI Bunko")">GENKAI Bunko (限界文庫)</MudSelectItem>
-                <MudSelectItem Value="@("CYBER Sneaker")">CYBER Sneaker (電脳スニーカー)</MudSelectItem>
-                <MudSelectItem Value="@("Phantom Novel")">Phantom Novel (幻影ノベル)</MudSelectItem>
-            </MudSelect>
+            <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1">
+                <div class="mud-input-control-input-container">
+                    <div class="mud-input mud-input-outlined mud-shrink">
+                        <select @bind="SelectedLabel" class="mud-input-slot mud-input-root mud-input-root-outlined" style="appearance: auto; padding-right: 8px;">
+                             <option Value="GENKAI Bunko">GENKAI Bunko (限界文庫)</option>
+                             <option Value="CYBER Sneaker">CYBER Sneaker (電脳スニーカー)</option>
+                             <option Value="Phantom Novel">Phantom Novel (幻影ノベル)</option>
+                        </select>
+                        <div class="mud-input-slot mud-input-root mud-input-root-outlined" style="display:none"></div>
+                        <div class="mud-input-outlined-border"></div>
+                    </div>
+                    <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Label</label>
+                </div>
+            </div>
 
             <MudDivider Class="my-4" />
 
@@ -74,13 +105,22 @@
             {
                 <MudTextField @bind-Value="ObiMainText" Label="Catchphrase (Main)" Variant="Variant.Outlined" Class="mt-2" />
                 <MudTextField @bind-Value="ObiSubText" Label="Sub Text" Variant="Variant.Outlined" Class="mt-2" />
-                <MudSelect T="string" Label="Color" @bind-Value="ObiColor" Variant="Variant.Outlined" Dense="true" Class="mt-2">
-                     <MudSelectItem Value="@("radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)")">Pastel Gradient</MudSelectItem>
-                     <MudSelectItem Value="@("#ef4444")">Burning Red</MudSelectItem>
-                     <MudSelectItem Value="@("#eab308")">Lightning Yellow</MudSelectItem>
-                     <MudSelectItem Value="@("#3b82f6")">Cyber Blue</MudSelectItem>
-                     <MudSelectItem Value="@("#000000")">Abyss Black</MudSelectItem>
-                </MudSelect>
+                <div class="mud-input-control mud-input-input-control mud-input-text mud-input-text-with-label mud-input-outlined mud-shrink mud-typography-input-1 mt-2">
+                    <div class="mud-input-control-input-container">
+                        <div class="mud-input mud-input-outlined mud-shrink">
+                            <select @bind="ObiColor" class="mud-input-slot mud-input-root mud-input-root-outlined" style="appearance: auto; padding-right: 8px;">
+                                <option Value="radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)">Pastel Gradient</option>
+                                <option Value="#ef4444">Burning Red</option>
+                                <option Value="#eab308">Lightning Yellow</option>
+                                <option Value="#3b82f6">Cyber Blue</option>
+                                <option Value="#000000">Abyss Black</option>
+                            </select>
+                            <div class="mud-input-slot mud-input-root mud-input-root-outlined" style="display:none"></div>
+                            <div class="mud-input-outlined-border"></div>
+                        </div>
+                        <label class="mud-input-label mud-input-label-outlined mud-input-label-animated mud-input-label-shrink mud-input-label-inputcontrol">Color</label>
+                    </div>
+                </div>
             }
              <MudDivider Class="my-4" />
              <!-- 5. Author -->
